@@ -1,0 +1,38 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+// Define your own datamodels here and run `yarn redwood prisma migrate dev`
+// to create migrations for them and apply to your dev DB.
+// TODO: Please remove the following example:
+model ClientInfo {
+  id         Int      @id @default(autoincrement())
+  client     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  details    Json
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  extra      Json?
+  userId     Int
+}
+
+model User {
+  id                  Int          @id @default(autoincrement())
+  name                String?
+  email               String       @unique
+  hashedPassword      String
+  salt                String
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+  roles               String
+  created_at          DateTime     @default(now())
+  updated_at          DateTime     @updatedAt
+  extra               Json?
+  ClientInfo          ClientInfo[]
+}
