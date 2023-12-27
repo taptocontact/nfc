@@ -216,6 +216,12 @@ const ClientInfoForm = (props) => {
                                 <textarea  value={data.scannerImage} name="scannerImage" id="" cols="59" rows="3" className='w-3/4 text-center rounded ' placeholder='Choose Image' onChange={handleInputChange} ></textarea>
 
                             </div>
+                            {/* <div className="p-3">
+                                <h3 className='pt-6 font-semibold'>Gallery </h3>
+
+                                <textarea  value={data.gallery} name="gallery" id="" cols="59" rows="3" className='w-3/4 text-center rounded ' placeholder='Choose Image' onChange={handleInputChange} ></textarea>
+
+                            </div> */}
                             <div className="p-3">
                                 <h3 className='pt-6 font-semibold'>Facebook</h3>
                                 <input

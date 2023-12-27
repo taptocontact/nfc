@@ -125,11 +125,11 @@ const ClientInfo = ({ clientInfo }) => {
         <img src={data.scannerImage} alt="" className='h-60 mt-4' />
       </div><br /><br />
       <h1 className='text-center text-4xl font-bold text-gray-900'>Gallery</h1>
-      <div className='flex flex-wrap justify-evenly'>
-        {/* {data.gallery.map((image, index) => (
+      {/* <div className='flex flex-wrap justify-evenly'>
+        {JSON.parse(data.gallery).map((image, index) => (
           <img key={index} src={image} alt={`Gallery Image ${index + 1}`} className="gallery-image mb-4 h-56 mt-20" />
-        ))} */}
-      </div>
+        ))}
+      </div> */}
       <div className='flex justify-center bg-gray-800 h-16 items-center text-white text-2xl'>
         <h1>DESIGNED BY | <Link to='http://edutechindia.co.in/'>EDUTECH</Link> </h1>
       </div>
