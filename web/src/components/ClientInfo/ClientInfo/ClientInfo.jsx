@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { FaFacebook, FaInstagramSquare, FaLinkedinIn, FaTwitter, FaTelegramPlane, FaYoutube, FaPhoneAlt } from 'react-icons/fa';
 import { IoLocationSharp } from "react-icons/io5";
 import { IoIosMail } from "react-icons/io";
+import { TbWorldPin } from "react-icons/tb";
+
 
 
 import { jsonDisplay, timeTag } from 'src/lib/formatters'
@@ -73,8 +75,9 @@ const ClientInfo = ({ clientInfo }) => {
           <div className="rounded-full overflow-hidden">
             <img src={data.profileImage} alt="" className="w-32 h-32 object-cover" />
           </div>
-          <div className="ml-4">
+          <div className="ml-4 flex flex-col space-y-2">
             <h1 className="text-2xl font-semibold">{data.fullname}</h1>
+            <h1 className="text-2xl font-semibold">{data.companyName}</h1>
           </div>
         </div>
       </div>
@@ -111,9 +114,9 @@ const ClientInfo = ({ clientInfo }) => {
 
         </div>
         <div className='p-10 border-4 m-10 w-56 bg-gray-100 rounded-2xl'>
-          <FaPhoneAlt size={40} />
+          <TbWorldPin size={40} />
           <p>Website</p>
-          <Link to={data.websiteLink}>{data.websiteLink}</Link>
+          <a href={data.websiteLink} target='_blank'>{data.websiteLink}</a>
 
 
         </div>
