@@ -70,14 +70,14 @@ const ClientInfo = ({ clientInfo }) => {
         </a>
       </div>
 
-      <div className="flex justify-center mt-8">
-        <div className="flex items-center">
+      <div className="flex  justify-center mt-8">
+        <div className="flex items-center max-md:flex-col">
           <div className="rounded-full overflow-hidden">
             <img src={data.profileImage} alt="" className="w-32 h-32 object-cover" />
           </div>
-          <div className="ml-4 flex flex-col space-y-2">
-            <h1 className="text-2xl font-semibold">{data.fullname}</h1>
-            <h1 className="text-2xl font-semibold">{data.companyName}</h1>
+          <div className="ml-4 flex flex-col space-y-2 ">
+            <h1 className="text-2xl font-semibold text-center">{data.fullname}</h1>
+            <h1 className="text-2xl font-semibold text-center">{data.companyName}</h1>
           </div>
         </div>
       </div>
@@ -85,7 +85,10 @@ const ClientInfo = ({ clientInfo }) => {
       <div className="flex justify-center mt-8">
         <div className="w-3/4">
           <h1 className="text-xl font-semibold">About:</h1>
-          <p className='text-justify'>{data.about}</p>
+          {/* <p className='text-justify'>{data.about}</p> */}
+          <div className='' dangerouslySetInnerHTML={{ __html: data.about }}>
+
+          </div>
         </div>
       </div><br /><br />
       <h1 className='text-center text-4xl font-bold text-gray-900'>Quick Contact:</h1>

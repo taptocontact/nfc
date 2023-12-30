@@ -7240,6 +7240,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"autobind-decorator@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "autobind-decorator@npm:2.4.0"
+  checksum: b31781d582e24b69aa88017046613e4f88e59f33f81c38c2885435c790fc8b4b1f52daf148c63cd609101795873daaae78aeb6c00b110a08dcbecefdcabc17f1
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:^10.4.16":
   version: 10.4.16
   resolution: "autoprefixer@npm:10.4.16"
@@ -8965,6 +8972,13 @@ __metadata:
   version: 3.33.2
   resolution: "core-js@npm:3.33.2"
   checksum: d6a56ad3e134846c805ce936788dd58cb51e861f173ed1f830979735d7865ea6f6a5a437076c36c8d8b842ba0384d052998f160774a8da7712f0f51df60167fe
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.28.0":
+  version: 3.35.0
+  resolution: "core-js@npm:3.35.0"
+  checksum: 1d545ff4406f2afa5e681f44b45ed5f7f119d158b380234d5aa7787ce7e47fc7a635b98b74c28c766ba8191e3db8c2316ad6ab4ff1ddecbc3fd618413a52c29c
   languageName: node
   linkType: hard
 
@@ -14019,6 +14033,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jodit-react@npm:^1.3.39":
+  version: 1.3.39
+  resolution: "jodit-react@npm:1.3.39"
+  dependencies:
+    jodit: ^3.20.2
+  peerDependencies:
+    react: ~0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ~0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: b1e798a85d7ed2a9aae395b4bd3e58073311654f1dcfe1b3405685bbdb5a9418c6a5ec84e3ed3c7fac29c3c4aa53e13a592618e4c9f01cbda82e40131e064896
+  languageName: node
+  linkType: hard
+
+"jodit@npm:^3.20.2":
+  version: 3.24.9
+  resolution: "jodit@npm:3.24.9"
+  dependencies:
+    autobind-decorator: ^2.4.0
+    core-js: ^3.28.0
+  checksum: f0066ad391835c27fcf0003d719628c0a808aa265c083d8a26b34bcc7327bb2e8df54f534c120cfe35201a35873637bcef9661fac4b58c75cea24a86cac769f9
+  languageName: node
+  linkType: hard
+
 "jose@npm:^4.11.4":
   version: 4.15.4
   resolution: "jose@npm:4.15.4"
@@ -18240,6 +18276,7 @@ __metadata:
   dependencies:
     "@redwoodjs/auth-dbauth-setup": 6.4.0
     "@redwoodjs/core": 6.4.0
+    jodit-react: ^1.3.39
     prettier-plugin-tailwindcss: 0.4.1
     react-icons: ^4.12.0
     react-select: ^5.8.0

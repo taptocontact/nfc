@@ -8,11 +8,16 @@ import {
   NumberField,
   Submit,
 } from '@redwoodjs/forms'
+import JoditEditor from 'jodit-react';
 import { useState } from 'react'
 
 const ClientInfoForm = (props) => {
 
+
+
   const [data, setData] = useState(props.clientInfo.details)
+  const [content, setContent] = useState('');
+
   console.log(data)
   const onSubmit = () => {
     let d = {}
@@ -28,13 +33,178 @@ const ClientInfoForm = (props) => {
     let value = event.target.value
 
     let obj = {
-        ...data,
-        [name]: value
+      ...data,
+      [name]: value
 
     }
     setData(obj)
-};
+  };
+  const handleTextAreaChange = (name,value) => {
+    let obj = {
+      ...data,
+      [name]: value
 
+    }
+    setData(obj)
+  }
+
+  let field = [
+    {
+      heading: 'Contact Number',
+      name: 'contact',
+      type: 'text',
+      value: data.contact,
+      placeholder: 'Enter Contact Number'
+    },
+    {
+      heading: 'Alternate Contact Number',
+      name: 'alternateContact',
+      type: 'text',
+      value: data.alternateContact,
+      placeholder: 'Enter Alternate Contact Number'
+    },
+    {
+      heading: 'Company Name',
+      name: 'companyName',
+      type: 'text',
+      value: data.companyName,
+      placeholder: 'Enter Company Name'
+    },
+    {
+      heading: 'Designation',
+      name: 'designation',
+      type: 'text',
+      value: data.designation,
+      placeholder: 'Enter Designation'
+    },
+    {
+      heading: 'Email Address',
+      name: 'email',
+      type: 'email',
+      value: data.email,
+      placeholder: 'Enter Email Address'
+    },
+    {
+      heading: 'Alternate Email Address',
+      name: 'alternativeEmail',
+      type: 'email',
+      value: data.alternativeEmail,
+      placeholder: 'Enter Alternate Email Address'
+    },
+    {
+      heading: 'Website Link',
+      name: 'websiteLink',
+      type: 'text',
+      value: data.websiteLink,
+      placeholder: 'Enter Website Link'
+    },
+    {
+      heading: 'Your Office Address',
+      name: 'address',
+      type: 'text',
+      value: data.address,
+      placeholder: 'Enter Your Address'
+    },
+    {
+      heading: 'Pincode',
+      name: 'pinCode',
+      type: 'text',
+      value: data.pinCode,
+      placeholder: 'Enter Pincode'
+    },
+
+    {
+      heading: 'Nature Of Business',
+      name: 'natureOfBusiness',
+      type: 'textarea',
+      value: data.natureOfBusiness,
+      placeholder: 'Enter Nature Of Business'
+    },
+    {
+      heading: 'Google Map Link',
+      name: 'mapLink',
+      type: 'text',
+      value: data.mapLink,
+      placeholder: 'Enter Google Map Link'
+    },
+
+    {
+      heading: 'Facebook',
+      name: 'facebook',
+      type: 'text',
+      value: data.facebook,
+      placeholder: 'Enter Facebook Url'
+    },
+    {
+      heading: 'Instagram',
+      name: 'instagram',
+      type: 'text',
+      value: data.instagram,
+      placeholder: 'Enter Instagram Url'
+    },
+    {
+      heading: 'Linkedin',
+      name: 'linkedin',
+      type: 'text',
+      value: data.linkedin,
+      placeholder: 'Enter Linkedin Url'
+    },
+    {
+      heading: 'Twitter',
+      name: 'twitter',
+      type: 'text',
+      value: data.twitter,
+      placeholder: 'Enter Twitter Url'
+    },
+    {
+      heading: 'Telegram',
+      name: 'telegram',
+      type: 'text',
+      value: data.telegram,
+      placeholder: 'Enter Telegram Url'
+    },
+    {
+      heading: 'Youtube',
+      name: 'youtube',
+      type: 'text',
+      value: data.youtube,
+      placeholder: 'Enter Youtube Url'
+    }
+  ];
+
+  let textAreaField = [
+    {
+      heading: 'About',
+      name: 'about',
+      type: 'textarea',
+      value: data.about,
+      placeholder: 'Enter About'
+    },
+  ]
+
+  let imagePickerField = [
+        {
+      heading: 'Profile Image',
+      name: 'profileImage',
+      type: 'textarea',
+      value: data.profileImage,
+      placeholder: 'Choose Image'
+    },
+    {
+      heading: 'Banner Image',
+      name: 'bannerImage',
+      type: 'textarea',
+      value: data.bannerImage,
+      placeholder: 'Choose Image'
+    },
+    {
+      heading: 'Upi Payment Scanner',
+      name: 'scannerImage',
+      type: 'textarea',
+      value: data.scannerImage,
+      placeholder: 'Choose Image'
+    },
+  ]
   return (
     <>
 
@@ -42,396 +212,92 @@ const ClientInfoForm = (props) => {
 
 
 
-            <div className='p-3 font-semibold bg-slate-300 text-black '>
-                <h2>Update Profile </h2>
-            </div>
-            <div className='text-black'>
-                <div className='m-3 bg-gray-400 rounded'>
-                    <div>
-                        <h2 className='p-2 text-lg font-semibold border-b border-black'>Profile Details</h2>
+      <div className='p-3 font-semibold bg-[#111827] text-center text-gray-100 text-2xl uppercase'>
+        <h2>Update Profile</h2>
+      </div>
 
-                        <div className='grid grid-cols-2'>
+      <div className='text-gray-800'>
+        <div className='m-3 bg-gray-200 rounded'>
+          <div>
+            <h2 className='p-2 text-xl font-semibold border-b border-gray-400'>Profile Details</h2>
 
+            <div className='grid grid-cols-2 max-md:grid-cols-1 gap-4'>
 
+              {field.map((item) => (
+                  < div className={`p-3 mb-4`} >
+                    <label htmlFor={item.name} className='block text-gray-700 font-semibold'>{item.heading}</label>
+                    <input
+                      id={item.name}
+                      className='w-full h-10 text-lg rounded border border-gray-400 px-3 mt-1 focus:outline-none focus:border-indigo-500'
+                      type="text"
+                      placeholder={item.placeholder}
+                      name={item.name}
+                      value={item.value}
+                      onChange={handleInputChange}
+                    />
+                  </div>
 
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Full Name</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Full Name'
-                                    name='fullname'
-                                    value={data.fullname}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Contact Number</h3>
-                                <input
-                                    className='w-3/4 rounded'
-                                    type="text"
-                                    placeholder='Enter Contact Number'
-                                    name='contact'
-                                    value={data.contact}
+              ))}
+              {
+                textAreaField.map((item) => (
+                  < div className="p-3 mb-4 md:col-span-2" >
+                    <h3 className='block text-gray-700 font-semibold'>{item.heading}</h3>
+                    <JoditEditor
+                      value={item.value}
+                      onChange={newContent => handleTextAreaChange(item.name, newContent)}
+                    />
 
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Alternate Contact Number</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Alternate Contact Number'
-                                    name='alternateContact'
-                                    value={data.alternateContact}
+                  </div>
+                ))
+              }
 
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Company Name</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Company Name'
-                                    name='companyName'
-                                    value={data.companyName}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Designation</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Designation'
-                                    name='designation'
-                                    value={data.designation}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Email Address</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="email"
-                                    placeholder='Enter'
-                                    name='email'
-                                    value={data.email}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Alternate Email Address</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="email"
-                                    placeholder='Enter Email Address'
-                                    name='alternativeEmail'
-                                    value={data.alternativeEmail}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Website Link</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Website Link'
-                                    name='websiteLink'
-                                    value={data.websiteLink}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Your Office Address</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Your Address'
-                                    name='adress'
-                                    value={data.adress}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Pincode</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Pincode'
-                                    name='pinCode'
-                                    value={data.pinCode}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>About</h3>
-
-                                <textarea value={data.about} name="about" id="" cols="59" rows="3" className='w-3/4 rounded ' placeholder='Enter ' onChange={handleInputChange} ></textarea>
-
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Nature Of Buisness</h3>
-
-                                <textarea value={data.natureOfBuisness} name="natureOfBuisness" id="" cols="59" rows="3" className='w-3/4 rounded ' placeholder='Enter Nature Of Buisness' onChange={handleInputChange} ></textarea>
-
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Google Map Link</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Google Map Link'
-                                    name='mapLink'
-                                    value={data.mapLink}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Profile Image</h3>
-
-                                <textarea  value={data.profileImage} name="profileImage" id="" cols="59" rows="3" className='w-3/4 text-center rounded ' placeholder='Choose Image' onChange={handleInputChange} ></textarea>
-
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Banner Image</h3>
-
-                                <textarea  value={data.bannerImage} name="bannerImage" id="" cols="59" rows="3" className='w-3/4 text-center rounded ' placeholder='Choose Image' onChange={handleInputChange} ></textarea>
-
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Upi Payment Scanner</h3>
-
-                                <textarea  value={data.scannerImage} name="scannerImage" id="" cols="59" rows="3" className='w-3/4 text-center rounded ' placeholder='Choose Image' onChange={handleInputChange} ></textarea>
-
-                            </div>
-                            {/* <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Gallery </h3>
-
-                                <textarea  value={data.gallery} name="gallery" id="" cols="59" rows="3" className='w-3/4 text-center rounded ' placeholder='Choose Image' onChange={handleInputChange} ></textarea>
-
-                            </div> */}
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Facebook</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Facebook Url'
-                                    name='facebook'
-                                    value={data.facebook}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Instagram</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Instagram Url'
-                                    name='instagram'
-                                    value={data.instagram}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Linkedin</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Linkedin Url'
-                                    name='linkedin'
-                                    value={data.linkedin}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Twitter</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Twitter Url'
-                                    name='twitter'
-                                    value={data.twitter}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Telegram</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Telegram Url'
-                                    name='telegram'
-                                    value={data.telegram}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Youtube</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Enter Youtube Url'
-                                    name='youtube'
-                                    value={data.youtube}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Updload Your Buisness Catalogue or Brochure (pdf)</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Choose File'
-                                    name='brochure'
-                                    value={data.brochure}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                                <h3 className='pt-6 font-semibold'>Updload images to create your Gallery (jpg.png)</h3>
-                                <input
-                                    className='w-3/4 rounded '
-                                    type="text"
-                                    placeholder='Choose File'
-                                    name='brochure'
-                                    value={data.brochure}
-
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="p-3">
-                <label>
-                  <input
-                    type="checkbox"
-                    required
-                    // checked={agreeToTerms}
-                    // onChange={handleCheckboxChange}
-                  />
-                  {/* {' '} */}
-                  I agree to the Terms and Conditions
-                </label>
+              <div className="p-3 mb-4">
+                <h3 className='block text-gray-700 font-semibold'>Upload Your Business Catalogue or Brochure (pdf)</h3>
+                <input
+                  className='w-full h-10 text-lg rounded border border-gray-400 px-3 mt-1 focus:outline-none focus:border-indigo-500'
+                  type="text"
+                  placeholder='Choose File'
+                  name='brochure'
+                  value={data.brochure}
+                  onChange={handleInputChange}
+                />
               </div>
 
-
-
-                        </div>
-
-
-                    </div>
-                </div>
-                <button className='pt-2 pb-2 ml-2 text-white bg-gray-800 pl-7 pr-7 rounded-2xl' onClick={onSubmit}>
-                    Save & Update Profile
-                </button>
+              <div className="p-3 mb-4">
+                <h3 className='block text-gray-700 font-semibold'>Upload images to create your Gallery (jpg.png)</h3>
+                <input
+                  className='w-full h-10 text-lg rounded border border-gray-400 px-3 mt-1 focus:outline-none focus:border-indigo-500'
+                  type="text"
+                  placeholder='Choose File'
+                  name='gallery'
+                  value={data.gallery}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
 
+            <div className="p-3">
+              <label className='flex items-center'>
+                <input
+                  type="checkbox"
+                  required
+                  className='mr-2'
+                />
+                <span className='text-lg text-gray-700'>
+                  I agree to the Terms and Conditions
+                </span>
+              </label>
+            </div>
+          </div>
+<div className='flex justify-center'>
+        <button className='m-4 py-2 px-6  text-white bg-[#111827] rounded-full hover:bg-[#161f31] focus:outline-none focus:shadow-outline-indigo' onClick={onSubmit}>
+          Save & Update Profile
+        </button>
+        </div>
+        </div>
+      </div >
     </>
-    // <div className="rw-form-wrapper">
-    //   <Form onSubmit={onSubmit} error={props.error}>
-    //     <FormError
-    //       error={props.error}
-    //       wrapperClassName="rw-form-error-wrapper"
-    //       titleClassName="rw-form-error-title"
-    //       listClassName="rw-form-error-list"
-    //     />
 
-    //     <Label
-    //       name="client"
-    //       className="rw-label"
-    //       errorClassName="rw-label rw-label-error"
-    //     >
-    //       Client
-    //     </Label>
-
-    //     <TextField
-    //       name="client"
-    //       defaultValue={props.clientInfo?.client}
-    //       className="rw-input"
-    //       errorClassName="rw-input rw-input-error"
-    //       validation={{ required: true }}
-    //     />
-
-    //     <FieldError name="client" className="rw-field-error" />
-
-    //     <Label
-    //       name="details"
-    //       className="rw-label"
-    //       errorClassName="rw-label rw-label-error"
-    //     >
-    //       Details
-    //     </Label>
-
-    //     <TextAreaField
-    //       name="details"
-    //       defaultValue={JSON.stringify(props.clientInfo?.details)}
-    //       className="rw-input"
-    //       errorClassName="rw-input rw-input-error"
-    //       validation={{ valueAsJSON: true, required: true }}
-    //     />
-
-    //     <FieldError name="details" className="rw-field-error" />
-
-    //     <Label
-    //       name="extra"
-    //       className="rw-label"
-    //       errorClassName="rw-label rw-label-error"
-    //     >
-    //       Extra
-    //     </Label>
-
-    //     <TextAreaField
-    //       name="extra"
-    //       defaultValue={JSON.stringify(props.clientInfo?.extra)}
-    //       className="rw-input"
-    //       errorClassName="rw-input rw-input-error"
-    //       validation={{ valueAsJSON: true }}
-    //     />
-
-    //     <FieldError name="extra" className="rw-field-error" />
-
-    //     <Label
-    //       name="userId"
-    //       className="rw-label"
-    //       errorClassName="rw-label rw-label-error"
-    //     >
-    //       User id
-    //     </Label>
-
-    //     <NumberField
-    //       name="userId"
-    //       defaultValue={props.clientInfo?.userId}
-    //       className="rw-input"
-    //       errorClassName="rw-input rw-input-error"
-    //       validation={{ required: true }}
-    //     />
-
-    //     <FieldError name="userId" className="rw-field-error" />
-
-    //     <div className="rw-button-group">
-    //       <Submit disabled={props.loading} className="rw-button rw-button-blue">
-    //         Save
-    //       </Submit>
-    //     </div>
-    //   </Form>
-    // </div>
   )
 }
 
