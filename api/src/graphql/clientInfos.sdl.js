@@ -12,7 +12,8 @@ export const schema = gql`
 
   type Query {
     clientInfos: [ClientInfo!]! @requireAuth
-    clientInfo(id: Int!): ClientInfo @skipAuth
+    clientInfo(id: Int!): ClientInfo @requireAuth
+    clientInfoClientId(client: String!):  ClientInfo @skipAuth
   }
 
   input CreateClientInfoInput {

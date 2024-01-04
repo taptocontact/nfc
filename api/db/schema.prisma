@@ -13,7 +13,7 @@ generator client {
 // TODO: Please remove the following example:
 model ClientInfo {
   id         Int      @id @default(autoincrement())
-  client     String
+  client     String   @unique
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   details    Json
   created_at DateTime @default(now())

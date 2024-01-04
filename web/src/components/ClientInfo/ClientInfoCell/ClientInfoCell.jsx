@@ -1,8 +1,8 @@
 import ClientInfo from 'src/components/ClientInfo/ClientInfo'
 
 export const QUERY = gql`
-  query FindClientInfoById($id: Int!) {
-    clientInfo: clientInfo(id: $id) {
+  query FindClientInfoById($id: String!) {
+    clientInfo: clientInfoClientId(client: $id) {
       id
       client
       details

@@ -9,6 +9,11 @@ export const clientInfo = ({ id }) => {
     where: { id },
   })
 }
+export const clientInfoClientId = ({ client }) => {
+  return db.clientInfo.findUnique({
+    where: { client },
+  })
+}
 
 export const createClientInfo = ({ input }) => {
   return db.clientInfo.create({

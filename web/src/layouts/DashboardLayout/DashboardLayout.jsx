@@ -102,7 +102,7 @@ const DashboardLayout = ({ children }) => {
                   </li>
 
                   <li className="relative">
-                    <Link to={routes.clientInfo({id:1})}>
+                    <Link to={routes.clientInfo({id:'u'})}>
                     <button
                       className="flex flex-row w-full items-center h-11 focus:outline-none  hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-gray-800 pr-6"
                       // onClick={routes.newClientInfo()}
@@ -170,7 +170,7 @@ const DashboardLayout = ({ children }) => {
 
                 </>} */}
               </ul>
-              <p className="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2023</p>
+              <p className="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2024</p>
             </div>
           </div>
           {/* ./Sidebar */}
