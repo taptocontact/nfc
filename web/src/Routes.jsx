@@ -13,6 +13,7 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import { useAuth } from './auth'
 import DashboardLayout from './layouts/DashboardLayout/DashboardLayout'
+import HomeLayout from './layouts/HomeLayout/HomeLayout'
 
 const Routes = () => {
   return (
@@ -28,13 +29,17 @@ const Routes = () => {
 
       <Route path="/signup" page={SignupPage} name="signup" />
 
+      <Set wrap={HomeLayout}>
+        <Route path="/" page={HomePage} name="home" />
+      </Set>
+
 
 
       <PrivateSet unauthenticated='login'>
         <Set wrap={DashboardLayout}>
-          <Route path="/" page={HomePage} name="home" />
 
-            <Route path="/client-infos/{id:Int}/edit" page={ClientInfoEditClientInfoPage} name="editClientInfo" />
+
+          <Route path="/client-infos/{id:Int}/edit" page={ClientInfoEditClientInfoPage} name="editClientInfo" />
           <Set wrap={ScaffoldLayout} title="ClientInfos" titleTo="clientInfos" buttonLabel="New ClientInfo" buttonTo="newClientInfo">
             <Route path="/client-infos/new" page={ClientInfoNewClientInfoPage} name="newClientInfo" />
 
