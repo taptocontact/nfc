@@ -18,6 +18,7 @@ import HomeLayout from './layouts/HomeLayout/HomeLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Route path="/welcome" page={WelcomePage} name="welcome" />
 
       <Set wrap={ScaffoldLayout} title="Users" titleTo="users" buttonLabel="New User" buttonTo="newUser">
         <Route path="/users/new" page={UserNewUserPage} name="newUser" />
@@ -37,20 +38,14 @@ const Routes = () => {
         <Route path="/work" page={WorkPage} name="work" />
       </Set>
 
-
-
-      <PrivateSet unauthenticated='login'>
+      <PrivateSet unauthenticated="login">
         <Set wrap={DashboardLayout}>
-
-
           <Route path="/client-infos/{id:Int}/edit" page={ClientInfoEditClientInfoPage} name="editClientInfo" />
           <Set wrap={ScaffoldLayout} title="ClientInfos" titleTo="clientInfos" buttonLabel="New ClientInfo" buttonTo="newClientInfo">
             <Route path="/client-infos/new" page={ClientInfoNewClientInfoPage} name="newClientInfo" />
 
             <Route path="/client-infos" page={ClientInfoClientInfosPage} name="clientInfos" />
           </Set>
-
-
         </Set>
       </PrivateSet>
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />

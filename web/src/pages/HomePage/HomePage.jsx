@@ -22,7 +22,7 @@ const HomePage = () => {
         </div>
         <div>
           <img
-            src={sir}
+            src={'/shlok.jpeg'}
             alt="sir"
             className="mt-12 h-3/4 rounded-2xl max-md:ml-7"
           ></img>
