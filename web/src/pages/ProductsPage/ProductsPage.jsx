@@ -15,15 +15,15 @@ const ProductsPage = () => {
       : products.filter((item) => item.type === selectedFilter)
   return (
     <>
-      <div className="ml-12 max-md:ml-0 max-md:text-center">
+      <div className="mb-12 ml-12 max-md:ml-0 max-md:text-center">
         <h1 className="mt-7 text-3xl font-bold">
           Want Business Cards for your Team with your own Logo? Call 9741229670
           or for Special Offers.
         </h1>
       </div>
-      <div className="mb-12 mt-12 flex flex-wrap justify-evenly">
+      <div className="flex justify-evenly max-lg:flex-wrap">
         <button
-          className={`rounded-2xl bg-gray-200 p-3 px-10 ${
+          className={`rounded-2xl bg-gray-200  p-3 px-10 max-lg:m-2  ${
             selectedFilter === 'All' ? 'bg-gray-500' : ''
           }`}
           onClick={() => setSelectedFilter('All')}
@@ -31,23 +31,23 @@ const ProductsPage = () => {
           All
         </button>
         <button
-          className={`rounded-2xl bg-gray-200 p-3 px-10 ${
+          className={`rounded-2xl bg-gray-200 p-3 px-10  max-lg:m-2 ${
             selectedFilter === 'gold' ? 'bg-gray-500' : ''
           }`}
           onClick={() => setSelectedFilter('gold')}
         >
-          Gold Card
+          NFC Gold Card
         </button>
         <button
-          className={`rounded-2xl bg-gray-200 p-3 px-10 ${
+          className={`rounded-2xl bg-gray-200 p-3 px-10  max-lg:m-2 ${
             selectedFilter === 'silver' ? 'bg-gray-500' : ''
           }`}
           onClick={() => setSelectedFilter('silver')}
         >
-          Silver Card
+          NFC Silver Card
         </button>
         <button
-          className={`rounded-2xl bg-gray-200 p-3 px-10 ${
+          className={`rounded-2xl bg-gray-200 p-3 px-10  max-lg:m-2 ${
             selectedFilter === 'google gold' ? 'bg-gray-500' : ''
           }`}
           onClick={() => setSelectedFilter('google gold')}
@@ -55,7 +55,7 @@ const ProductsPage = () => {
           Google Review Gold Card
         </button>
         <button
-          className={`rounded-2xl bg-gray-200 p-3 px-10 ${
+          className={`rounded-2xl bg-gray-200 p-3 px-10  max-lg:m-2 ${
             selectedFilter === 'google' ? 'bg-gray-500' : ''
           }`}
           onClick={() => setSelectedFilter('google silver')}
@@ -63,15 +63,12 @@ const ProductsPage = () => {
           Google Review Silver Card
         </button>
       </div>
-      <div className="mb-5 ml-12 grid grid-cols-3 max-lg:grid-cols-2 max-sm:ml-16 max-sm:grid-cols-1">
+      {/* <div className="mb-5 ml-12 grid grid-cols-3 max-lg:grid-cols-2 max-sm:ml-16 max-sm:grid-cols-1"> */}
+      <div className="mb-12 grid grid-cols-2 max-md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {filteredProducts.map((item) => (
-          <div className="relative mt-6 flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+          <div className="relative mt-6 flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md max-sm:w-full">
             <div className="bg-blue-gray-500 shadow-blue-gray-500/40 relative mx-4 mt-12 h-72 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
-              <img
-                src={item.image}
-                alt="card-image"
-                className="h-full w-full "
-              />
+              <img src={item.image} alt="card-image" className="h-full " />
             </div>
             <div className="p-6">
               <h5 className="text-blue-gray-900 mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal antialiased">

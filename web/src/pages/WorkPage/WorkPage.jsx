@@ -4,7 +4,7 @@ import { MetaTags } from '@redwoodjs/web'
 const WorkPage = () => {
   return (
     <>
-      <h1 className="text-center text-3xl font-bold max-md:m-1">
+      <h1 className="mb-6 mt-6 text-center text-3xl font-bold max-md:m-1">
         How It Works - TapToContact
       </h1>
       <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
@@ -72,7 +72,7 @@ const Step = ({ title, image, description }) => {
   return (
     <div className="mb-8 rounded-lg bg-gray-200 p-6">
       <h2 className="mb-4 text-xl font-bold text-gray-900">{title}</h2>
-      <img src={image} alt="Step Image" className="mb-4 w-full" />
+      {/* <img src={image} alt="Step Image" className="mb-4 w-full" /> */}
       <p className="text-gray-700">{description}</p>
     </div>
   )
