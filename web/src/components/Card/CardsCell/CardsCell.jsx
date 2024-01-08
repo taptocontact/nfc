@@ -1,18 +1,19 @@
 import { Link, routes } from '@redwoodjs/router'
 
-import ClientInfos from 'src/components/ClientInfo/ClientInfos'
+import Cards from 'src/components/Card/Cards'
 
 export const QUERY = gql`
-  query FindClientInfos {
-    clientInfos {
+  query FindCards {
+    cards {
       id
-      client
-      details
+      name
+      color
+      price
+      imageUrl
+      type
       created_at
       updated_at
       extra
-      userId
-      status
     }
   }
 `
@@ -22,8 +23,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No clientInfos yet. '}
-      <Link to={routes.newClientInfo()} className="rw-link">
+      {'No cards yet. '}
+      <Link to={routes.newCard()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>
@@ -34,6 +35,6 @@ export const Failure = ({ error }) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ clientInfos }) => {
-  return <ClientInfos clientInfos={clientInfos} />
+export const Success = ({ cards }) => {
+  return <Cards cards={cards} />
 }

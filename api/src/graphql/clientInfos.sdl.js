@@ -8,6 +8,7 @@ export const schema = gql`
     updated_at: DateTime!
     extra: JSON
     userId: Int!
+    status: String!
   }
 
   type Query {
@@ -21,6 +22,7 @@ export const schema = gql`
     details: JSON!
     extra: JSON
     userId: Int!
+    status: String!
   }
 
   input UpdateClientInfoInput {
@@ -28,6 +30,7 @@ export const schema = gql`
     details: JSON
     extra: JSON
     userId: Int
+    status: String
   }
 
   type Mutation {

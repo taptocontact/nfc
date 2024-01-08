@@ -130,7 +130,8 @@ export const handler = async (event, context) => {
         data:{
           userId:user.id,
           client:client,
-          details:{}
+          details:{},
+          status:'pending'
         }
       })
       return user

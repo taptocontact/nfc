@@ -91,8 +91,41 @@ const DashboardLayout = ({ children }) => {
                   </Link>
                 </li>
 
+                {
+                  currentUser.roles=='admin' &&
+                  <>
+                    <li className="relative">
+                      <Link to={routes.cards()}>
+                        <button
+                          className="flex flex-row w-full items-center h-11 focus:outline-none  hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-gray-800 pr-6"
+                        // onClick={routes.newClientInfo()}
+                        >
+                          <span className="inline-flex justify-center items-center ml-4">
+                            <MdLocalPharmacy />
+                          </span>
+                          <span className="ml-2 text-sm tracking-wide truncate">Cards</span>
+                        </button>
+                      </Link>
+                    </li>
+                    <li className="relative">
+                      <Link to={routes.clientInfos()}>
+                        <button
+                          className="flex flex-row w-full items-center h-11 focus:outline-none  hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-gray-800 pr-6"
+                        // onClick={routes.newClientInfo()}
+                        >
+                          <span className="inline-flex justify-center items-center ml-4">
+                            <MdLocalPharmacy />
+                          </span>
+                          <span className="ml-2 text-sm tracking-wide truncate">Clients</span>
+                        </button>
+                      </Link>
+                    </li>
 
-                <>
+                  </>
+                }
+
+
+           {  currentUser.roles!='admin' &&   <>
                   <li className="px-5 hidden md:block">
                     <div className="flex flex-row items-center h-8">
                       <div className="text-sm font-light tracking-wide text-gray-400 uppercase">Tap To Contact</div>
@@ -101,10 +134,10 @@ const DashboardLayout = ({ children }) => {
 
 
 
-                  <Dashboard1Cell id={currentUser.id}/>
+                  <Dashboard1Cell id={currentUser.id} />
 
 
-                </>
+                </>}
 
 
 
