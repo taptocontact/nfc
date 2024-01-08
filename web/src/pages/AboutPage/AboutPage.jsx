@@ -44,7 +44,11 @@ const AboutPage = () => {
             About TapToContact
           </h1>
           <p className="mb-12 pr-12 max-md:m-7 max-md:p-0 max-md:text-center max-md:text-justify">
-            Welcome to TapToContact, where innovation meets connection. We are a team of passionate individuals dedicated to transforming the way professionals network and exchange information. At TapToContact, we believe that networking should be seamless, sustainable, and leave a lasting impression.
+            Welcome to TapToContact, where innovation meets connection. We are a
+            team of passionate individuals dedicated to transforming the way
+            professionals network and exchange information. At TapToContact, we
+            believe that networking should be seamless, sustainable, and leave a
+            lasting impression.
             <br />
             <br /> We are a diverse team of tech enthusiasts, designers, and
             business minds who share a common goal: to bring innovation to the
