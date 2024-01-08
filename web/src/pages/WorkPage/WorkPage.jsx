@@ -4,7 +4,7 @@ import { MetaTags } from '@redwoodjs/web'
 const WorkPage = () => {
   return (
     <>
-      <h1 className="text-center text-3xl font-bold max-md:m-1">
+      <h1 className="mb-6 mt-6 text-center text-3xl font-bold max-md:m-1">
         How It Works - TapToContact
       </h1>
       <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
