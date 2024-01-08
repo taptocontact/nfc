@@ -37,9 +37,9 @@ const HomeLayout = ({ children }) => {
 
         </div>
         <div className="flex items-center text-4xl">
-          <span>
+          <Link to={routes.login()}>
             <CgProfile />
-          </span>
+          </Link>
         </div>
 
         <div className="sm:hidden flex items-center text-4xl " onClick={() => setIsOpen((e) => !e)}>

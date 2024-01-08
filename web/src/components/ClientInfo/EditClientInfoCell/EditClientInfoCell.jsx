@@ -2,7 +2,8 @@ import { navigate, routes } from '@redwoodjs/router'
 
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-
+import { useEffect, useState } from 'react'
+import { useAuth } from "src/auth"
 import ClientInfoForm from 'src/components/ClientInfo/ClientInfoForm'
 
 export const QUERY = gql`
@@ -39,12 +40,14 @@ export const Failure = ({ error }) => (
 )
 
 export const Success = ({ clientInfo }) => {
+  const { isAuthenticated, currentUser, logOut, hasRole } = useAuth()
+  const [wait,setWait] = useState(false)
   const [updateClientInfo, { loading, error }] = useMutation(
     UPDATE_CLIENT_INFO_MUTATION,
     {
       onCompleted: () => {
         toast.success('ClientInfo updated')
-        navigate(routes.editClientInfo({id:1}))
+        navigate(routes.editClientInfo({id:clientInfo.id}))
       },
       onError: (error) => {
         toast.error(error.message)
@@ -55,22 +58,32 @@ export const Success = ({ clientInfo }) => {
   const onSave = (input, id) => {
     updateClientInfo({ variables: { id, input } })
   }
+  useEffect(()=>{
+    try {
+      if(currentUser.id!==clientInfo.userId){
+        navigate(routes.home())
+      }
+      else{
+        setWait(true)
+      }
+    } catch (error) {
+      navigate(routes.home())
+
+    }
+
+  },[])
 
   return (
-    // <div className="rw-segment">
-    //   <header className="rw-segment-header">
-    //     <h2 className="rw-heading rw-heading-secondary">
-    //       Edit ClientInfo {clientInfo?.id}
-    //     </h2>
-    //   </header>
-    //   <div className="rw-segment-main">
-        <ClientInfoForm
+
+    <>
+   { wait &&        <ClientInfoForm
           clientInfo={clientInfo}
           onSave={onSave}
           error={error}
           loading={loading}
-        />
-    //   {/* </div>
-    // </div> */}
+        />}
+
+    </>
+
   )
 }

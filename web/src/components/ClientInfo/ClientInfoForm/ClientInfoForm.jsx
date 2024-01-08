@@ -21,8 +21,8 @@ const ClientInfoForm = (props) => {
   console.log(data)
   const onSubmit = () => {
     let d = {}
-    d['client'] = 'u'
-    d['userId'] = 1
+    // d['client'] = 'u'
+    // d['userId'] = 1
     d['details'] = data
 
     props.onSave(d, props?.clientInfo?.id)

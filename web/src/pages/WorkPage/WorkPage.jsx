@@ -72,7 +72,7 @@ const Step = ({ title, image, description }) => {
   return (
     <div className="mb-8 rounded-lg bg-gray-200 p-6">
       <h2 className="mb-4 text-xl font-bold text-gray-900">{title}</h2>
-      <img src={image} alt="Step Image" className="mb-4 w-full" />
+      {/* <img src={image} alt="Step Image" className="mb-4 w-full" /> */}
       <p className="text-gray-700">{description}</p>
     </div>
   )

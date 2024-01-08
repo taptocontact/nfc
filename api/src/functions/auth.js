@@ -3,6 +3,18 @@ import { DbAuthHandler } from '@redwoodjs/auth-dbauth-api'
 import { cookieName } from 'src/lib/auth'
 import { db } from 'src/lib/db'
 
+function generateRandomString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let randomString = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  return randomString;
+}
+
 export const handler = async (event, context) => {
   const forgotPasswordOptions = {
     // handler() is invoked after verifying that a user was found with the given
@@ -103,8 +115,8 @@ export const handler = async (event, context) => {
     //
     // If this returns anything else, it will be returned by the
     // `signUp()` function in the form of: `{ message: 'String here' }`.
-    handler: ({ username, hashedPassword, salt, userAttributes }) => {
-      return db.user.create({
+    handler: async ({ username, hashedPassword, salt, userAttributes }) => {
+      const user = await  db.user.create({
         data: {
           email: username,
           hashedPassword: hashedPassword,
@@ -113,6 +125,15 @@ export const handler = async (event, context) => {
           // name: userAttributes.name
         },
       })
+      const client = generateRandomString(7)
+      await db.clientInfo.create({
+        data:{
+          userId:user.id,
+          client:client,
+          details:{}
+        }
+      })
+      return user
     },
 
     // Include any format checks for password here. Return `true` if the

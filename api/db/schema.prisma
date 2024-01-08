@@ -20,6 +20,19 @@ model ClientInfo {
   updated_at DateTime @updatedAt
   extra      Json?
   userId     Int
+  status     String
+}
+
+model Card {
+  id         Int      @id @default(autoincrement())
+  name       String
+  color      String
+  price      Int
+  imageUrl   String
+  type       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  extra      Json?
 }
 
 model User {
