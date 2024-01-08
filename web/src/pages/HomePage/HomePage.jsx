@@ -16,9 +16,11 @@ const HomePage = () => {
             Elevate your networking game with our innovative platform.
           </h1>
           <h1 className="m-2 text-3xl font-bold text-white">TapToContact</h1>
-          <button className="ml-2 mt-4 rounded-3xl bg-white p-2 transition hover:bg-[#FFB400]">
-            Buy Now
-          </button>
+          <Link to={routes.products()}>
+            <button className="ml-2 mt-4 rounded-3xl bg-white p-2 transition hover:bg-[#FFB400]">
+              Buy Now
+            </button>
+          </Link>
         </div>
         <div>
           <img
@@ -52,9 +54,9 @@ const HomePage = () => {
             efficient, environmentally friendly, and tailored to the modern
             professional.
           </p>
-          <button className=" ml-6 rounded-3xl bg-white p-2 transition hover:bg-[#FFB400] max-md:mb-7">
+          {/* <button className=" ml-6 rounded-3xl bg-white p-2 transition hover:bg-[#FFB400] max-md:mb-7">
             Read More
-          </button>
+          </button> */}
         </div>
         <div className="flex items-center justify-center">
           <img src={'/card/1.jpg'} alt="card1" className="h-52"></img>
@@ -96,9 +98,11 @@ const HomePage = () => {
         </h1>
       </div>
       <div className="flex justify-center">
-        <button className="mb-2 ml-2 mt-4 rounded-3xl bg-black p-2 text-white transition hover:bg-[#FFB400]">
-          Buy Now
-        </button>
+        <Link to={routes.products()}>
+          <button className="mb-2 ml-2 mt-4 rounded-3xl bg-black p-2 text-white transition hover:bg-[#FFB400]">
+            Buy Now
+          </button>
+        </Link>
       </div>
     </>
   )

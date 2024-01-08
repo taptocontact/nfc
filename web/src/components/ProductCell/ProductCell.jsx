@@ -1,3 +1,4 @@
+import { Link, routes } from "@redwoodjs/router"
 import { useState } from "react"
 
 export const QUERY = gql`
@@ -100,12 +101,14 @@ export const Success = ({ products }) => {
             </p>
           </div>
           <div className="p-6 pt-0">
+            <Link to={routes.signup()}>
             <button
               className="select-none rounded-lg bg-gray-900 px-6 py-3 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
             >
               Buy Now
             </button>
+            </Link>
           </div>
         </div>
       ))}
