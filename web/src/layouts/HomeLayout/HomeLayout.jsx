@@ -12,7 +12,7 @@ const HomeLayout = ({ children }) => {
     <>
       <div className="relative flex justify-between bg-black p-3 px-5 text-white">
         <div className="">
-          <img src="/logo.jpg" className="h-16 rounded-xl" alt="" />
+          <img src="/logo.png" className="h-16 rounded-xl" alt="" />
         </div>
 
         <div
@@ -72,7 +72,7 @@ const HomeLayout = ({ children }) => {
       <div className=" ">
         <div className="flex flex-col items-center space-y-3 bg-black p-3 text-white">
           <div>
-            <img src="/logo.jpg" className="h-20" alt="" />
+            <img src="/logo.png" className="h-16" alt="" />
           </div>
           <div>
             <span>

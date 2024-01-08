@@ -19,10 +19,6 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
 
-
-
-
-
       <Set wrap={ScaffoldLayout} title="Users" titleTo="users" buttonLabel="New User" buttonTo="newUser">
         <Route path="/users/new" page={UserNewUserPage} name="newUser" />
         <Route path="/users/{id:Int}/edit" page={UserEditUserPage} name="editUser" />
@@ -33,6 +29,8 @@ const Routes = () => {
 
 
       <Set wrap={HomeLayout}>
+        <Route path="/welcome" page={WelcomePage} name="welcome" />
+
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/" page={HomePage} name="home" />
@@ -41,12 +39,11 @@ const Routes = () => {
         <Route path="/work" page={WorkPage} name="work" />
       </Set>
 
-
-
-      <PrivateSet unauthenticated='login'>
+      <PrivateSet unauthenticated="login">
         <Set wrap={DashboardLayout}>
+        <Route path="/dashboard" page={DashboardPage} name="dashboard" />
 
-          <Route path="/dashboard" page={DashboardPage} name="dashboard" />
+
 
 
           <Route path="/client-infos/{id:Int}/edit" page={ClientInfoEditClientInfoPage} name="editClientInfo" />
@@ -54,7 +51,6 @@ const Routes = () => {
             <Route path="/client-infos/new" page={ClientInfoNewClientInfoPage} name="newClientInfo" />
             <Route path="/client-infos" page={ClientInfoClientInfosPage} name="clientInfos" />
           </Set>
-
           <Set wrap={ScaffoldLayout} title="Cards" titleTo="cards" buttonLabel="New Card" buttonTo="newCard">
             <Route path="/cards/new" page={CardNewCardPage} name="newCard" />
             <Route path="/cards/{id:Int}/edit" page={CardEditCardPage} name="editCard" />
