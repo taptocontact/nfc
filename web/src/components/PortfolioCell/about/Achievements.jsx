@@ -8,7 +8,7 @@ const achievementsContent = [
   { title: "53", subTitle1: "awards", subTitle2: "won" },
 ];
 
-const Achievements = () => {
+const Achievements = ({userDetail}) => {
   // return (
   //   <div className="row">
   //     {achievementsContent.map((val, i) => (
@@ -28,7 +28,7 @@ const Achievements = () => {
       {achievementsContent.map((val, i) => (
         <div className="col-6">
           <div className="box-stats with-margin">
-            <img src="" alt="" />
+            {/* <img src={userDetail.} alt="" /> */}
             {/* <h3 className=""></h3> */}
             {/* <p className="open-sans-font m-0 position-relative text-uppercase"> */}
               {/* <span className="d-block"></span> */}

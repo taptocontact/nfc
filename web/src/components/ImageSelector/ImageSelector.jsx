@@ -49,7 +49,7 @@ const ImageSelector = ({ id, label, allowMultiple, handleFileChange, url }) => {
         <div className="mb-4 flex items-center justify-center">
           <input
             type="file"
-            // id={`imageInput_${id}`}
+            id={`imageInput_${id}`}
             accept="image/*"
             onChange={handleImage}
             className="hidden"

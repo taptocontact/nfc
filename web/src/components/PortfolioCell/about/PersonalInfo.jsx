@@ -28,7 +28,7 @@ const PersonalInfo = ({userDetail}) => {
     <li>
       <span className="title">Full Name: </span>
       <span className="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">
-        {userDetail.fullname}
+        {userDetail.name}
       </span>
     </li>
     <li>

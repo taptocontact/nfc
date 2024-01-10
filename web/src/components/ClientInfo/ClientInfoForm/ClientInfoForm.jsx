@@ -50,6 +50,13 @@ const ClientInfoForm = (props) => {
 
   let field = [
     {
+      heading: 'Name',
+      name: 'name',
+      type: 'text',
+      value: data.name,
+      placeholder: 'Enter Your Name'
+    },
+    {
       heading: 'Contact Number',
       name: 'contact',
       type: 'text',

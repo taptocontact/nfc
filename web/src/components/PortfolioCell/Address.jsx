@@ -17,7 +17,8 @@ const Address = ({userDetail}) => {
     <>
       <p className="open-sans-font custom-span-contact position-relative">
         <i className="fa fa-map position-absolute"></i>
-        <span className="d-block">Address Point</span>{userDetail.address}
+        <span className="d-block">Address Point</span>
+        <a href={userDetail.mapLink}>{userDetail.address}</a>
       </p>
       {/* End .custom-span-contact */}
 
@@ -26,9 +27,11 @@ const Address = ({userDetail}) => {
         <span className="d-block">mail me</span>{" "}
         <a href={`mailto:${userDetail.email}`}>{userDetail.email}</a>
       </p>
+
       {/* End .custom-span-contact */}
 
       <p className="open-sans-font custom-span-contact position-relative">
+
         <i className="fa fa-phone-square position-absolute"></i>
         <span className="d-block">call me</span>{" "}
         <a href={`Tel:${userDetail.contact}`}>{userDetail.contact}</a>
