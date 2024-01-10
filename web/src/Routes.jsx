@@ -19,6 +19,8 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
 
+      <Route path="/portfolio" page={PortfolioPage} name="portfolio" />
+
       <Set wrap={ScaffoldLayout} title="Users" titleTo="users" buttonLabel="New User" buttonTo="newUser">
         <Route path="/users/new" page={UserNewUserPage} name="newUser" />
         <Route path="/users/{id:Int}/edit" page={UserEditUserPage} name="editUser" />

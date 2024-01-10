@@ -41,7 +41,7 @@ export const Success = ({ user }) => {
                   </li>
 
                   <li className="relative">
-                    <Link to={routes.clientInfo({id:user.ClientInfo[0].client})}>
+                    <Link to={routes.portfolio({id:user.ClientInfo[0].client})}>
                     <button
                       className="flex flex-row w-full items-center h-11 focus:outline-none  hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-gray-800 pr-6"
                       // onClick={routes.newClientInfo()}

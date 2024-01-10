@@ -62,40 +62,6 @@ const CardForm = (props) => {
 
 
 
-  const handleUpload = () => {
-    if (file) {
-      const storageRef = ref(storage, `cards/${'filePath'}.jpg`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Track upload progress
-          // You can use snapshot.bytesTransferred and snapshot.totalBytes
-        },
-        (error) => {
-          console.error(error.message);
-        },
-        async () => {
-          // Handle successful upload
-          console.log("File uploaded successfully!");
-
-          // Get the download URL
-          try {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            console.log("Download URL:", downloadURL);
-            setUrl(downloadURL)
-          } catch (error) {
-            console.error("Error getting download URL:", error.message);
-          }
-        }
-      );
-    } else {
-      console.error("No file selected!");
-    }
-  };
-
-
 
   return (
     <div className="rw-form-wrapper">
@@ -179,7 +145,7 @@ const CardForm = (props) => {
 
         <FieldError name="imageUrl" className="rw-field-error" /> */}
         <div className='text-center'>
-          <ImageSelector id='logo' Label='Card Image' allowMultiple={false} url={url} handleUpload={handleUpload} handleFileChange={handleFileChange} />
+          <ImageSelector id='logo' Label='Card Image' allowMultiple={false} url={url}  handleFileChange={handleFileChange} />
 
         </div>
 
