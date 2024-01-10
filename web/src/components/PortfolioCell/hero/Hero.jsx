@@ -25,7 +25,26 @@ const Hero = ({userDetail}) => {
     setIsOpen(!isOpen);
   }
 
+  const animationStyles = `
+  @keyframes socialIconAnimation {
+    0% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+  }
 
+  .social.list-unstyled li a {
+    animation: socialIconAnimation 1s infinite;
+    }
+  `;
   // const { userId } = useParams(); // Get the userId parameter from the URL
 
   // // Find the user details based on the userId
@@ -60,6 +79,32 @@ const Hero = ({userDetail}) => {
               <span className="button-text">{heroContent.heroBtn}</span>
               <span className="button-icon fa fa-arrow-right"></span>
             </button>
+            <ul className="social list-unstyled">
+
+        <li>
+        <style>{animationStyles}</style>
+
+          <a href={userDetail.facebook} target="_blank" rel="noreferrer">
+          <i className="fa fa-facebook" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
+          </a>
+          <a href={userDetail.instagram} target="_blank" rel="noreferrer">
+          <i className="fa fa-instagram" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
+           </a>
+          <a href={userDetail.linkedin} target="_blank" rel="noreferrer">
+          <i className="fa fa-linkedin" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
+          </a>
+          <a href={userDetail.twitter} target="_blank" rel="noreferrer">
+          <i className="fa fa-twitter" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
+                    </a>
+          <a href={userDetail.telegram} target="_blank" rel="noreferrer">
+          <i className="fa fa-telegram" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
+                    </a>
+          <a href={userDetail.youtube} target="_blank" rel="noreferrer">
+          <i className="fa fa-youtube" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
+                    </a>
+
+        </li>
+        </ul>
           </div>
         </div>
       </div>

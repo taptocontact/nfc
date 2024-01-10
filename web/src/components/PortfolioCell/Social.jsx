@@ -31,32 +31,32 @@ const Social = ({userDetail}) => {
     <ul className="social list-unstyled pt-1 mb-5">
 
         <li>
-          <a href={userDetail.media.facebook} target="_blank" rel="noreferrer">
+          <a href={userDetail.facebook} target="_blank" rel="noreferrer">
             <i className="fa fa-facebook"></i>
           </a>
         </li>
         <li>
-          <a href={userDetail.media.instagram} target="_blank" rel="noreferrer">
+          <a href={userDetail.instagram} target="_blank" rel="noreferrer">
             <i className="fa fa-instagram"></i>
           </a>
         </li>
         <li>
-          <a href={userDetail.media.linkedin} target="_blank" rel="noreferrer">
+          <a href={userDetail.linkedin} target="_blank" rel="noreferrer">
             <i className="fa fa-linkedin"></i>
           </a>
         </li>
         <li>
-          <a href={userDetail.media.twitter} target="_blank" rel="noreferrer">
+          <a href={userDetail.twitter} target="_blank" rel="noreferrer">
             <i className="fa fa-twitter"></i>
           </a>
         </li>
         <li>
-          <a href={userDetail.media.telegram} target="_blank" rel="noreferrer">
+          <a href={userDetail.telegram} target="_blank" rel="noreferrer">
             <i className="fa fa-telegram"></i>
           </a>
         </li>
         <li>
-          <a href={userDetail.media.youtube} target="_blank" rel="noreferrer">
+          <a href={userDetail.youtube} target="_blank" rel="noreferrer">
             <i className="fa fa-youtube"></i>
           </a>
         </li>

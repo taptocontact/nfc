@@ -13,6 +13,11 @@ export const QUERY = gql`
       extra
       userId
       status
+      user{
+        id
+        name
+        email
+      }
     }
   }
 `

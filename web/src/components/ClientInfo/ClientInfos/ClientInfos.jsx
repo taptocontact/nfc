@@ -26,6 +26,7 @@ const UPDATE_CLIENT_INFO_MUTATION = gql`
       updated_at
       extra
       userId
+
     }
   }
 `
@@ -94,8 +95,10 @@ const ClientInfosList = ({ clientInfos }) => {
           <tr>
             <th>Id</th>
             <th>Client</th>
-            {/* <th>Details</th>
-            <th>Created at</th>
+            <th>Details</th>
+            <th>Name</th>
+            <th>Email</th>
+            {/* <th>Created at</th>
             <th>Updated at</th>
             <th>Extra</th>
             <th>User id</th> */}
@@ -109,8 +112,10 @@ const ClientInfosList = ({ clientInfos }) => {
             <tr key={clientInfo.id}>
               <td>{truncate(clientInfo.id)}</td>
               <td>{truncate(clientInfo.client)}</td>
-              {/* <td>{jsonTruncate(clientInfo.details)}</td>
-              <td>{timeTag(clientInfo.created_at)}</td>
+              <td>{jsonTruncate(clientInfo.details)}</td>
+              <td>{clientInfo.user.name}</td>
+              <td>{clientInfo.user.email}</td>
+              {/* <td>{timeTag(clientInfo.created_at)}</td>
               <td>{timeTag(clientInfo.updated_at)}</td>
               <td>{jsonTruncate(clientInfo.extra)}</td>
               <td>{truncate(clientInfo.userId)}</td> */}

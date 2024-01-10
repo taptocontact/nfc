@@ -31,6 +31,7 @@ const HomeDark = ({userDetail}) => {
   //   setDetail(userDetail)
   // }, [])
   // document.querySelector("body").classList.remove("rtl");
+  console.log(userDetail)
 
   return (
     <div className="yellow">

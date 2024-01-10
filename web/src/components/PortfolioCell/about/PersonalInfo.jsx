@@ -52,7 +52,7 @@ const PersonalInfo = ({userDetail}) => {
     <li>
       <span className="title">Address: </span>
       <span className="value d-block d-sm-inline-block d-lg-block d-xl-inline-block">
-        {userDetail.adress}
+        {userDetail.address}
       </span>
     </li>
     <li>

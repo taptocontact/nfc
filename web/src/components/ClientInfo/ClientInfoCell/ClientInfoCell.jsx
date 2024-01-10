@@ -24,4 +24,5 @@ export const Failure = ({ error }) => (
 
 export const Success = ({ clientInfo }) => {
   return <ClientInfo clientInfo={clientInfo} />
+  // return <div>{JSON.stringify(clientInfo)}</div>
 }
