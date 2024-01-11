@@ -15,6 +15,9 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
+import { storage } from "src/Utils/Firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import ImageSelector from 'src/components/ImageSelector/ImageSelector'
 
 export const QUERY = gql`
   query FindOrderQuery($id: Int!) {
@@ -50,6 +53,18 @@ export const Success = ({ order }) => {
   const [phone, setPhone] = useState('');
   const [designation, setDesignation] = useState('');
   const [company, setCompany] = useState('');
+  const [googleReviewLink, setGoogleReviewLink] = useState('');
+  // const [cardLogo, setCardLogo] = useState('');
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState('')
+
+  const handleFileChange = (e) => {
+    if (e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+
   const [createClientInfo, { loading, error }] = useMutation(
     CREATE_CLIENT_INFO_MUTATION,
     {
@@ -65,19 +80,53 @@ export const Success = ({ order }) => {
 
   const verifyEmail = async (e) => {
     e.preventDefault();
+    if (file) {
+      const storageRef = ref(storage, `google review gold card/${googleReviewLink}.jpg`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Track upload progress
+          // You can use snapshot.bytesTransferred and snapshot.totalBytes
+        },
+        (error) => {
+          console.error(error.message);
+        },
+        async () => {
+          // Handle successful upload
+          console.log("File uploaded successfully!");
+
+          // Get the download URL
+          try {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            console.log("Download URL:", downloadURL);
+            setUrl(downloadURL)
+            // data['imageUrl'] = downloadURL
+            // props.onSave(data, props?.card?.id)
+          } catch (error) {
+            console.error("Error getting download URL:", error.message);
+          }
+        }
+      );
+    } else {
+      console.error("No file selected!");
+    }
     const obj = {
       contact: phone,
       designation: designation,
       email: email,
       companyName: company,
       fullname: name,
-      cardInfo: order
+      cardInfo: order,
+      url,
+      googleReviewLink
 
     }
     const input = {
-      status:'Pending',
+      status: 'Pending',
       details: {
-        order:obj
+        order: obj
       }
 
     }
@@ -100,14 +149,14 @@ export const Success = ({ order }) => {
             <div className="grid grid-cols-2 mt-10 border-black space-x-4 max-md:grid-cols-1">
 
               <div className='max-sm:order-2'>
-                  <div className="bg-blue-gray-500 shadow-blue-gray-500/40 relative mx-4 mt-12 h-72 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
-                    <img src={order.imageUrl} alt="card-image" className="h-full " />
-                  </div>
-                  <div className="p-6">
-                    <h5 className="text-center text-yellow-300 mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal antialiased">
-                      {order.type} - {order.name}
-                    </h5>
-                    </div>
+                <div className="bg-blue-gray-500 shadow-blue-gray-500/40 relative mx-4 mt-12 h-72 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
+                  <img src={order.imageUrl} alt="card-image" className="h-full " />
+                </div>
+                <div className="p-6">
+                  <h5 className="text-center text-yellow-300 mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal antialiased">
+                    {order.type} - {order.name}
+                  </h5>
+                </div>
 
 
 
@@ -146,6 +195,7 @@ export const Success = ({ order }) => {
                   placeholder="Designation"
                   value={designation}
                   onChange={(e) => setDesignation(e.target.value)}
+                  required
                 />
                 <input
                   type="text"
@@ -153,7 +203,30 @@ export const Success = ({ order }) => {
                   placeholder="Company Name"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
+                  required
                 />
+
+                {
+                  order.type.includes('google') &&
+                  <input
+                    type="text"
+                    className="text-center w-96 max-sm:w-80  outline-white bg-slate-400  hover:placeholder:shadow-white py-4 hover:placeholder:text-black hover:bg-[#FFB400] placeholder:text-white my-5 rounded-2xl"
+                    placeholder="Google Review Link"
+                    value={googleReviewLink}
+                    required
+
+                    onChange={(e) => setGoogleReviewLink(e.target.value)}
+                  />
+                }
+                {
+                  order.type.includes('google gold') &&
+                  <div className='text-center border-yellow-500 border'>
+                    <ImageSelector id='logo' Label='Company Logo Image' allowMultiple={false} url={url} handleFileChange={handleFileChange} />
+
+                  </div>
+                }
+
+
                 <div className="flex flex-col border-black">
                   <button
                     type="submit"

@@ -7,6 +7,7 @@ import {
   NumberField,
   TextAreaField,
   Submit,
+  SelectField,
 } from '@redwoodjs/forms'
 import { storage } from "src/Utils/Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -145,13 +146,13 @@ const CardForm = (props) => {
 
         <FieldError name="imageUrl" className="rw-field-error" /> */}
         <div className='text-center'>
-          <ImageSelector id='logo' Label='Card Image' allowMultiple={false} url={url}  handleFileChange={handleFileChange} />
+          <ImageSelector id='logo' Label='Card Image' allowMultiple={false} url={url} handleFileChange={handleFileChange} />
 
         </div>
 
 
 
-        <Label
+        {/* <Label
           name="type"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
@@ -167,7 +168,43 @@ const CardForm = (props) => {
           validation={{ required: true }}
         />
 
-        <FieldError name="type" className="rw-field-error" />
+        <FieldError name="type" className="rw-field-error" /> */}
+
+        <div className='text-black'>
+
+
+          <Label
+            name="type"
+            className="rw-label"
+            errorClassName="rw-label rw-label-error"
+          >
+            Select the Type
+          </Label>
+
+          <SelectField
+            name="type"
+            validation={{
+              required: true,
+              validate: {
+                matchesInitialValue: (value) => {
+                  return (
+                    value !== 'Please select an option' || 'Select an Option'
+                  )
+                },
+              },
+            }}
+          >
+            <option>Please select an option</option>
+            <option value={'gold'}>gold</option>
+            <option value={'silver'}>silver</option>
+            <option value={'google gold'}>google gold</option>
+            <option value={'google silver'}>google silver</option>
+
+
+          </SelectField>
+
+          <FieldError name="roles" className="rw-field-error" />
+        </div>
 
         <Label
           name="extra"

@@ -4,7 +4,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/ClientInfo/ClientInfosCell'
 import { jsonTruncate, timeTag, truncate } from 'src/lib/formatters'
-import React, { useEffect, useRef } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import qrcode from 'qrcode'
 
 
@@ -34,18 +34,34 @@ const UPDATE_CLIENT_INFO_MUTATION = gql`
 const ClientInfosList = ({ clientInfos }) => {
 
 
-  const canvasRef = useRef(null);
+
+  const [canvasRefs, setCanvasRefs] = useState([]);
 
   useEffect(() => {
-    const generateQRCode = (text) => {
-      qrcode.toCanvas(canvasRef.current, text, function (error) {
-        if (error) console.error(error);
-        console.log('success!');
-      });
-    };
+    setCanvasRefs(clientInfos.map(() => createRef()));
+  }, [clientInfos]);
 
-    generateQRCode('7YQ94ZP');
-  }, []);
+  useEffect(() => {
+    // if(canvasRefs)
+    // {
+      try {
+
+
+      const generateQRCode = (text, canvasRef) => {
+        qrcode.toCanvas(canvasRef.current, text, function (error) {
+          if (error) console.error(error);
+          console.log('success!');
+        });
+      };
+
+      clientInfos.forEach((clientInfo, index) => {
+        generateQRCode(clientInfo.client, canvasRefs[index]);
+      });
+    } catch (error) {
+
+    }
+    // }
+  }, [clientInfos, canvasRefs]);
 
 
   const [deleteClientInfo] = useMutation(DELETE_CLIENT_INFO_MUTATION, {
@@ -108,7 +124,7 @@ const ClientInfosList = ({ clientInfos }) => {
           </tr>
         </thead>
         <tbody>
-          {clientInfos.map((clientInfo) => (
+          {clientInfos.map((clientInfo,index) => (
             <tr key={clientInfo.id}>
               <td>{truncate(clientInfo.id)}</td>
               <td>{truncate(clientInfo.client)}</td>
@@ -120,11 +136,11 @@ const ClientInfosList = ({ clientInfos }) => {
               <td>{jsonTruncate(clientInfo.extra)}</td>
               <td>{truncate(clientInfo.userId)}</td> */}
               <td>{truncate(clientInfo.status)}</td>
-              <td><canvas id="canvas" ref={canvasRef}></canvas></td>
+              <td><canvas id={`canvas-${clientInfo.id}`} ref={canvasRefs[index]}></canvas></td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
-                    to={routes.clientInfo({ id: clientInfo.id })}
+                    to={routes.clientInfo({ id: clientInfo.client })}
                     title={'Show clientInfo ' + clientInfo.id + ' detail'}
                     className="rw-button rw-button-small"
                   >
