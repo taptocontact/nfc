@@ -14,12 +14,12 @@ generator client {
 model ClientInfo {
   id         Int      @id @default(autoincrement())
   client     String   @unique
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   details    Json
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   extra      Json?
-  userId     Int
+  userId     Int?
   status     String
 }
 

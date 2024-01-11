@@ -25,20 +25,20 @@ describe('clientInfos', () => {
     expect(result).toEqual(scenario.clientInfo.one)
   })
 
-  scenario('creates a clientInfo', async (scenario) => {
+  scenario('creates a clientInfo', async () => {
     const result = await createClientInfo({
       input: {
-        client: 'String',
+        client: 'String4502045',
         details: { foo: 'bar' },
-        updated_at: '2023-12-27T07:12:35.813Z',
-        userId: scenario.clientInfo.two.userId,
+        updated_at: '2024-01-11T06:45:40.425Z',
+        status: 'String',
       },
     })
 
-    expect(result.client).toEqual('String')
+    expect(result.client).toEqual('String4502045')
     expect(result.details).toEqual({ foo: 'bar' })
-    expect(result.updated_at).toEqual(new Date('2023-12-27T07:12:35.813Z'))
-    expect(result.userId).toEqual(scenario.clientInfo.two.userId)
+    expect(result.updated_at).toEqual(new Date('2024-01-11T06:45:40.425Z'))
+    expect(result.status).toEqual('String')
   })
 
   scenario('updates a clientInfo', async (scenario) => {
@@ -47,10 +47,10 @@ describe('clientInfos', () => {
     })
     const result = await updateClientInfo({
       id: original.id,
-      input: { client: 'String2' },
+      input: { client: 'String86406892' },
     })
 
-    expect(result.client).toEqual('String2')
+    expect(result.client).toEqual('String86406892')
   })
 
   scenario('deletes a clientInfo', async (scenario) => {

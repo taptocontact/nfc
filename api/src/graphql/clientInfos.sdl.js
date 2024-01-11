@@ -2,12 +2,12 @@ export const schema = gql`
   type ClientInfo {
     id: Int!
     client: String!
-    user: User!
+    user: User
     details: JSON!
     created_at: DateTime!
     updated_at: DateTime!
     extra: JSON
-    userId: Int!
+    userId: Int
     status: String!
   }
 
@@ -18,10 +18,10 @@ export const schema = gql`
   }
 
   input CreateClientInfoInput {
-    client: String!
+    client: String
     details: JSON!
     extra: JSON
-    userId: Int!
+    userId: Int
     status: String!
   }
 
@@ -34,7 +34,7 @@ export const schema = gql`
   }
 
   type Mutation {
-    createClientInfo(input: CreateClientInfoInput!): ClientInfo! @requireAuth
+    createClientInfo(input: CreateClientInfoInput!): ClientInfo! @skipAuth
     updateClientInfo(id: Int!, input: UpdateClientInfoInput!): ClientInfo!
       @requireAuth
     deleteClientInfo(id: Int!): ClientInfo! @requireAuth

@@ -13,7 +13,7 @@ export const schema = gql`
 
   type Query {
     cards: [Card!]! @skipAuth
-    card(id: Int!): Card @requireAuth
+    card(id: Int!): Card @skipAuth
   }
 
   input CreateCardInput {

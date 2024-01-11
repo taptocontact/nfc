@@ -5,11 +5,13 @@ import { FaInstagramSquare, FaLinkedin } from 'react-icons/fa'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 import { Link, routes } from '@redwoodjs/router'
+import { Toaster } from '@redwoodjs/web/dist/toast'
 
 const HomeLayout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
+      <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
       <div className="relative flex justify-between bg-black p-3 px-5 text-white">
         <div className="">
           <img src="/logo.png" className="h-16 rounded-xl" alt="" />

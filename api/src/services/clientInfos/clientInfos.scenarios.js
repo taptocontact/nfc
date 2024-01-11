@@ -2,34 +2,18 @@ export const standard = defineScenario({
   clientInfo: {
     one: {
       data: {
-        client: 'String',
+        client: 'String1563936',
         details: { foo: 'bar' },
-        updated_at: '2023-12-27T07:12:35.827Z',
-        user: {
-          create: {
-            email: 'String9012765',
-            hashedPassword: 'String',
-            salt: 'String',
-            roles: 'String',
-            updated_at: '2023-12-27T07:12:35.827Z',
-          },
-        },
+        updated_at: '2024-01-11T06:45:40.514Z',
+        status: 'String',
       },
     },
     two: {
       data: {
-        client: 'String',
+        client: 'String2937521',
         details: { foo: 'bar' },
-        updated_at: '2023-12-27T07:12:35.827Z',
-        user: {
-          create: {
-            email: 'String2036726',
-            hashedPassword: 'String',
-            salt: 'String',
-            roles: 'String',
-            updated_at: '2023-12-27T07:12:35.827Z',
-          },
-        },
+        updated_at: '2024-01-11T06:45:40.514Z',
+        status: 'String',
       },
     },
   },

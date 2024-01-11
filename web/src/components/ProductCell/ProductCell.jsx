@@ -37,7 +37,7 @@ export const Success = ({ products }) => {
     <div className="mb-12 ml-12 max-md:ml-0 max-md:text-center">
       <h1 className="mt-7 text-3xl font-bold">
         Want Business Cards for your Team with your own Logo? Call 9741229670
-        or for Special Offers.
+         for Special Offers.
       </h1>
     </div>
     <div className="flex justify-evenly max-lg:flex-wrap">
@@ -101,7 +101,7 @@ export const Success = ({ products }) => {
             </p>
           </div>
           <div className="p-6 pt-0">
-            <Link to={routes.signup()}>
+            <Link to={routes.order({id:item.id})}>
             <button
               className="select-none rounded-lg bg-gray-900 px-6 py-3 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"

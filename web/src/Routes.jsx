@@ -19,6 +19,8 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
 
+
+
       <Route path="/portfolio" page={PortfolioPage} name="portfolio" />
 
       <Set wrap={ScaffoldLayout} title="Users" titleTo="users" buttonLabel="New User" buttonTo="newUser">
@@ -32,6 +34,8 @@ const Routes = () => {
 
       <Set wrap={HomeLayout}>
         <Route path="/welcome" page={WelcomePage} name="welcome" />
+
+        <Route path="/order/{id:Int}" page={OrderPage} name="order" />
 
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
