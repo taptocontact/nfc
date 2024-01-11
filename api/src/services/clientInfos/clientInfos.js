@@ -54,10 +54,18 @@ export const updateClientInfo = ({ id, input }) => {
   })
 }
 
-export const deleteClientInfo = ({ id }) => {
-  return db.clientInfo.delete({
+export const deleteClientInfo = async ({ id }) => {
+  const data = await db.clientInfo.findUnique({
     where: { id },
   })
+  const userId = data.userId
+  const data1 = await db.clientInfo.delete({
+    where: { id },
+  })
+  await db.user.delete({
+    where: {id:userId}
+  })
+  return data1
 }
 
 export const ClientInfo = {
