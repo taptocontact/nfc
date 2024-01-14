@@ -21,7 +21,7 @@ const Routes = () => {
 
 
 
-      <Route path="/portfolio" page={PortfolioPage} name="portfolio" />
+      <Route path="/portfolio/{id:String}" page={PortfolioPage} name="portfolio" />
 
       <Set wrap={ScaffoldLayout} title="Users" titleTo="users" buttonLabel="New User" buttonTo="newUser">
         <Route path="/users/new" page={UserNewUserPage} name="newUser" />

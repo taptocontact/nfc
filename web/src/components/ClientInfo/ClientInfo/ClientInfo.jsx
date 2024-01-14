@@ -37,7 +37,6 @@ const ClientInfo = ({ clientInfo }) => {
   }
   const [data, setData] = useState({});
   const canvasRef = useRef(null);
-  const canvasRef1 = useRef(null);
 
   useEffect(() => {
     // Consider removing unnecessary code inside useEffect
@@ -45,49 +44,34 @@ const ClientInfo = ({ clientInfo }) => {
     console.log(data)
   }, [data]);
   useEffect(() => {
-    const generateQRCode = async  (text) => {
-      // let img = new Image();
+    const generateQRCode =  (text) => {
+       qrcode.toCanvas(canvasRef.current, text, { color: { dark: '#000000', light: '#0000' } }, function (error) {
+        if (error) console.error(error);
+        console.log('success!');
+        // Get the 2D context of the canva
+      });
+      // const ctx = canvasRef.current.getContext('2d');
 
-      // // await qrcode.toCanvas(canvasRef1.current, text, { color: { dark: '#000000', light: '#0000' } });
-      // qrcode.toCanvas(canvasRef1.current, text, options, (error) => {
-      //   if (error) {
-      //     console.error(error);
-      //   } else {
-      //     // Convert the canvas to an image
-      //     const imageDataURL = canvasRef1.current.toDataURL('image/png');
+      // // Load image
+      // const image = new Image();
+      // image.src = 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg';
 
-      //     // Create an image element
-      //     // const image =
+      // image.onload = () => {
+      //   // Set canvas size to match image size
+      //   canvasRef.current.width = image.width;
+      //   canvasRef.current.height = image.height;
 
-      //     // Set the source of the image to the data URL
-      //     img.src = imageDataURL;
+      //   // Draw the image onto the canvas at (0, 0)
 
-      //     // Now, the 'image' variable contains the image representation of the QR code.
-      //     // You can append it to the DOM or perform other actions as needed.
-      //     // For example, if you have a div with id 'qrCodeImageContainer':
-      //     // const imageContainer = document.getElementById('qrCodeImageContainer');
-      //     // imageContainer.appendChild(image);
-      //   }
-      // });
-
-
-      const ctx = canvasRef.current.getContext('2d');
-
-      // Load image
-      const image = new Image();
-      image.src = 'https://firebasestorage.googleapis.com/v0/b/taptocontact-fa569.appspot.com/o/img%2FFront.png?alt=media&token=b1ba695e-1d3b-4e5e-977a-01ad355ca7f9';
-
-      image.onload = () => {
-        canvas.width = image.width;
-        canvas.height = image.height;
-
-        // Draw the full image on the canvas
-        ctx.drawImage(image, 0, 0, image.width, image.height);
-        // ctx.drawImage(img, 0, 0);
-      };
+      //   // Draw the QR code onto the canvas at the center
+      //   const qrCodeX = (image.width - canvasRef.current.width) / 2;
+      //   const qrCodeY = (image.height - canvasRef.current.height) / 2;
+      //   ctx.drawImage(canvasRef.current, qrCodeX, qrCodeY);
+      //   // ctx.drawImage(image, 0, 0);
+      // };
     }
 
-    generateQRCode(clientInfo.client);
+    generateQRCode('192.168.29.163:8910/portfolio/'+clientInfo.client);
   }, []);
   const saveQRCodeImage = () => {
     const canvas = canvasRef.current;
@@ -140,7 +124,6 @@ const ClientInfo = ({ clientInfo }) => {
             <p>Updated At: {clientInfo.updated_at}</p>
             <p>User ID: {clientInfo.userId}</p>
             <canvas id="canvas" ref={canvasRef}></canvas>
-            {/* <canvas id="canvas1" ref={canvasRef1}></canvas> */}
             <button onClick={saveQRCodeImage}>Save QR Code</button>
           </div>
         </div>
