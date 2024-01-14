@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -7,6 +7,7 @@ import { jsonTruncate, timeTag, truncate } from 'src/lib/formatters'
 import React, { createRef, useEffect, useRef, useState } from 'react';
 import qrcode from 'qrcode'
 import SearchTable from 'src/components/SearchTable/SearchTable'
+import { useAuth } from 'src/auth'
 
 
 const DELETE_CLIENT_INFO_MUTATION = gql`
@@ -41,6 +42,8 @@ const ClientInfosList = ({ clientInfos }) => {
 
   },[clientInfos])
   // console.log(clientInfos)
+
+  const { isAuthenticated, signUp } = useAuth()
 
 
 
@@ -104,13 +107,35 @@ const ClientInfosList = ({ clientInfos }) => {
       onError: (error) => {
         toast.error(error.message)
       },
+      refetchQueries: [{ query: QUERY }],
+      awaitRefetchQueries: true,
     }
   )
 
   const onChange = ( id) => {
     let input = {}
-    input['status'] = 'complete'
+    input['status'] = 'completed'
     updateClientInfo({ variables: { id, input } })
+  }
+
+  const generateCard = async (data2) => {
+    const response = await signUp({
+      username: data2.username,
+      roles: data2.roles,
+      password: data2.password,
+      clientId:data2.clientId
+    })
+
+    if (response.message) {
+      toast(response.message)
+    }
+    // else
+    // if (response.error) {
+    //   toast.error(response.error)
+    // } else {
+    //   // user is signed in automatically
+    //   toast.success('Welcome!')
+    // }
   }
 
   const change = (search)=>{
@@ -144,11 +169,21 @@ const ClientInfosList = ({ clientInfos }) => {
     },
     {
        headerClassName: 'text-left',
-      Header:  'QR Code',
-      Cell: ({original,index}) => (
-        <canvas id={`canvas-${original.id}`} ref={canvasRefs[index]}></canvas>
-      )
+      Header:  'Card Type',
+      accessor: 'details.order.cardInfo.type',
     },
+    {
+       headerClassName: 'text-left',
+      Header:  'Status',
+      accessor: 'status',
+    },
+    // {
+    //    headerClassName: 'text-left',
+    //   Header:  'QR Code',
+    //   Cell: ({original,index}) => (
+    //     <canvas id={`canvas-${original.id}`} ref={canvasRefs[index]}></canvas>
+    //   )
+    // },
     {
        headerClassName: 'text-left',
       Header:  'Action',
@@ -172,14 +207,50 @@ const ClientInfosList = ({ clientInfos }) => {
         >
           Delete
         </button>
-        <button
+        {
+          original.details.order.cardInfo.type.includes('google') ?
+          <>
+{ original.status!='completed' &&  <button
           type="button"
           title={'Change Status ' + original.id}
           className="rw-button rw-button-small rw-button-small"
           onClick={() => onChange(original.id)}
         >
           Status
+        </button>}
+
+
+          </>
+
+          : <>
+
+<button
+          type="button"
+          title={'Change Status ' + original.id}
+          className="rw-button rw-button-small rw-button-small"
+          onClick={() => generateCard({
+            username: original.details.order.email,
+            roles: 'client',
+            password: original.details.order.contact,
+            clientId: original.id
+          })}
+        >
+          Generate Card
         </button>
+
+
+
+
+          </>
+        }
+        {/* <button
+          type="button"
+          title={'Change Status ' + original.id}
+          className="rw-button rw-button-small rw-button-small"
+          onClick={() => onChange(original.id)}
+        >
+          Status
+        </button> */}
       </nav>
 
       ),

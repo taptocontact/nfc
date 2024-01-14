@@ -3,17 +3,17 @@ import { DbAuthHandler } from '@redwoodjs/auth-dbauth-api'
 import { cookieName } from 'src/lib/auth'
 import { db } from 'src/lib/db'
 
-function generateRandomString(length) {
-  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let randomString = '';
+// function generateRandomString(length) {
+//   const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+//   let randomString = '';
 
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    randomString += characters.charAt(randomIndex);
-  }
+//   for (let i = 0; i < length; i++) {
+//     const randomIndex = Math.floor(Math.random() * characters.length);
+//     randomString += characters.charAt(randomIndex);
+//   }
 
-  return randomString;
-}
+//   return randomString;
+// }
 
 export const handler = async (event, context) => {
   const forgotPasswordOptions = {
@@ -122,19 +122,27 @@ export const handler = async (event, context) => {
           hashedPassword: hashedPassword,
           salt: salt,
           roles:userAttributes.roles
-          // name: userAttributes.name
         },
       })
-      const client = generateRandomString(7)
-      await db.clientInfo.create({
+      const client = await db.clientInfo.findUnique({
+        where: {id:userAttributes.clientId}
+      })
+      // const client = generateRandomString(7)
+
+      // console.log('uasjhxadus hello \n\n\n\n\n\n\n\n',user)
+      await db.clientInfo.update({
         data:{
           userId:user.id,
-          client:client,
-          details:{},
-          status:'pending'
+          status:'Active'
+        },
+        where:{
+          id:userAttributes.clientId
         }
       })
-      return user
+      await db.user.delete({
+        where: {id:client.userId}
+      })
+      return {message:'Generated Card'}
     },
 
     // Include any format checks for password here. Return `true` if the

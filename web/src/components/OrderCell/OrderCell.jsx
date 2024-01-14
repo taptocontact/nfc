@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { useEffect } from 'react'
-
+// import { env } from '@redwoodjs/env';
 
 import {
   Form,
@@ -18,6 +18,13 @@ import { useAuth } from 'src/auth'
 import { storage } from "src/Utils/Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import ImageSelector from 'src/components/ImageSelector/ImageSelector'
+import {
+  useJsApiLoader,
+  Autocomplete,
+} from '@react-google-maps/api'
+import HomeDark from '../PortfolioCell/Views/HomeDark'
+import ProductCell from '../ProductCell'
+
 
 export const QUERY = gql`
   query FindOrderQuery($id: Int!) {
@@ -48,6 +55,18 @@ export const Failure = ({ error }) => (
 )
 
 export const Success = ({ order }) => {
+
+  // const { isLoaded } = useJsApiLoader({
+  //   googleMapsApiKey: 'AIzaSyDHS6eyoDeso2aKc6yJYxIgGkqFfE7tJsA',
+  //   libraries: ['places'],
+  // })
+  const originRef = useRef()
+  // if (!isLoaded) {
+  //   return <ProductCell />
+  // }
+
+
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -121,7 +140,7 @@ export const Success = ({ order }) => {
       cardInfo: order,
       url,
       googleReviewLink,
-      source:'online'
+      source: 'online'
 
     }
     const input = {
@@ -206,6 +225,17 @@ export const Success = ({ order }) => {
                   onChange={(e) => setCompany(e.target.value)}
                   required
                 />
+                {/* <Autocomplete> */}
+                  <input
+                    type="text"
+                    className="text-center w-96 max-sm:w-80  outline-white bg-slate-400  hover:placeholder:shadow-white py-4 hover:placeholder:text-black hover:bg-[#FFB400] placeholder:text-white my-5 rounded-2xl"
+                    placeholder="Company Name"
+                    // value={company}
+                    ref={originRef}
+                    // onChange={(e) => setCompany(e.target.value)}
+                    required
+                  />
+                {/* </Autocomplete> */}
 
                 {
                   order.type.includes('google') &&

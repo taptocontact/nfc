@@ -31,24 +31,28 @@ const HomeLayout = ({ children }) => {
           <Link
             to={routes.home()}
             className="p-3 transition-all hover:rounded-lg hover:bg-yellow-500"
+            onClick={()=>setIsOpen(false)}
           >
             <span>Home</span>
           </Link>
           <Link
             to={routes.products()}
             className="p-3 transition-all hover:rounded-lg hover:bg-yellow-500"
+            onClick={()=>setIsOpen(false)}
           >
             <span>Products</span>
           </Link>
           <Link
             to={routes.about()}
             className="p-3 transition-all hover:rounded-lg hover:bg-yellow-500"
+            onClick={()=>setIsOpen(false)}
           >
             <span>About</span>
           </Link>
           <Link
             to={routes.work()}
             className="p-3 transition-all hover:rounded-lg hover:bg-yellow-500"
+            onClick={()=>setIsOpen(false)}
           >
             <span>How it works</span>
           </Link>

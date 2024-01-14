@@ -9,7 +9,7 @@ import sir from './sir.jpg'
 const AboutPage = () => {
   return (
     <>
-      <div className="grid grid-cols-2 bg-gray-900 max-md:grid-cols-1">
+      {/* <div className="grid grid-cols-2 bg-gray-900 max-md:grid-cols-1">
         <div className="ml-7 mt-12">
           <h1 className="m-2 text-3xl text-white">Welcome to TapToContact </h1>
           <p className="m-2 text-base text-white">
@@ -30,7 +30,7 @@ const AboutPage = () => {
             className="mb-12 mt-12 h-96 rounded-2xl max-md:ml-7"
           ></img>
         </div>
-      </div>
+      </div> */}
       <div className="grid grid-cols-2 max-md:grid-cols-1">
         <div className="flex justify-center">
           <img

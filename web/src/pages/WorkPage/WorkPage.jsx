@@ -56,13 +56,13 @@ const WorkPage = () => {
           <h1 className="text-center text-3xl font-bold">
             Start Tapping into a New Era of Networking with TapToContact!
           </h1>
-          <a
-            href="#signup-link"
+          <Link to={routes.products()}
+
             className="mt-4 inline-block rounded-full bg-gray-900 px-4 py-2 font-bold text-white hover:bg-gray-800
             max-md:flex max-md:justify-center"
           >
             Get Started
-          </a>
+          </Link>
         </section>
       </div>
     </>
