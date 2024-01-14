@@ -12,7 +12,7 @@ const WorkPage = () => {
           <Step
             title="Step 1: Sign Up"
             image="images/sign-up-image.png"
-            description="Getting started with TapToContact is easy. Begin by signing up for a free account. Enter your details, choose a username, and set a strong password. Once registered, you'll have access to the full suite of TapToContact features.
+            description="Getting started with TapToContact is easy. Enter your details. Once registered, you'll have access to the full suite of TapToContact features.
 
 "
           />
@@ -20,7 +20,7 @@ const WorkPage = () => {
           <Step
             title="Step 2: Create Your Digital Business Card"
             image="images/create-card-image.png"
-            description="After signing up, it's time to create your digital business card. Use our intuitive card builder to customize the layout, colors, fonts, and add essential information like your name, title, company, contact details, and a brief bio. Make it uniquely yours, reflecting your brand identity.
+            description="After signing up, Make it uniquely yours, reflecting your brand identity.
 
 "
           />
@@ -46,11 +46,11 @@ const WorkPage = () => {
             image="images/create-card-image.png"
             description="Gain insights into your networking efforts with our analytics dashboard. Track interactions, measure engagement, and understand how well your digital business card is performing. This valuable data empowers you to refine your networking strategy for optimal results."
           />
-          <Step
+          {/* <Step
             title="Step 6: Upgrade for Premium Features"
             image="images/create-card-image.png"
             description="While our free plan offers essential features, take your networking game to the next level with our premium plans. Unlock advanced customization options, access enhanced analytics, and enjoy additional benefits designed to elevate your professional presence."
-          />
+          /> */}
 
           {/* Repeat similar steps for other sections */}
           <h1 className="text-center text-3xl font-bold">
