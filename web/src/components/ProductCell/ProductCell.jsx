@@ -86,9 +86,10 @@ export const Success = ({ products }) => {
     <div className="mb-12 grid grid-cols-2 max-md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {filteredProducts.map((item) => (
         <div className="relative mt-6 flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md max-sm:w-full">
-          <div className="bg-blue-gray-500 shadow-blue-gray-500/40 relative mx-4 mt-12 h-72 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
-            <img src={item.imageUrl} alt="card-image" className="h-full " />
-          </div>
+        <div className="bg-blue-gray-500 shadow-blue-gray-500/40 relative mx-4 mt-12 h-72 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg flex items-center justify-center">
+  <img src={item.imageUrl} alt="card-image" className="h-full" />
+</div>
+
           <div className="p-6">
             <h5 className="text-blue-gray-900 mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal antialiased">
               {item.name}
