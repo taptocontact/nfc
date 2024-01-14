@@ -10,6 +10,9 @@ import {
 } from '@redwoodjs/forms'
 import JoditEditor from 'jodit-react';
 import { useState } from 'react'
+import { storage } from "src/Utils/Firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import ImageSelector from 'src/components/ImageSelector/ImageSelector';
 
 const ClientInfoForm = (props) => {
 
@@ -39,7 +42,7 @@ const ClientInfoForm = (props) => {
     }
     setData(obj)
   };
-  const handleTextAreaChange = (name,value) => {
+  const handleTextAreaChange = (name, value) => {
     let obj = {
       ...data,
       [name]: value
@@ -47,6 +50,15 @@ const ClientInfoForm = (props) => {
     }
     setData(obj)
   }
+
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState('')
+
+  const handleFileChange = (e) => {
+    if (e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
 
   let field = [
     {
@@ -190,7 +202,7 @@ const ClientInfoForm = (props) => {
   ]
 
   let imagePickerField = [
-        {
+    {
       heading: 'Profile Image',
       name: 'profileImage',
       type: 'textarea',
@@ -231,18 +243,18 @@ const ClientInfoForm = (props) => {
             <div className='grid grid-cols-2 max-md:grid-cols-1 gap-4'>
 
               {field.map((item) => (
-                  < div className={`p-3 mb-4`} >
-                    <label htmlFor={item.name} className='block text-gray-700 font-semibold'>{item.heading}</label>
-                    <input
-                      id={item.name}
-                      className='w-full h-10 text-lg rounded border border-gray-400 px-3 mt-1 focus:outline-none focus:border-indigo-500'
-                      type="text"
-                      placeholder={item.placeholder}
-                      name={item.name}
-                      value={item.value}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+                < div className={`p-3 mb-4`} >
+                  <label htmlFor={item.name} className='block text-gray-700 font-semibold'>{item.heading}</label>
+                  <input
+                    id={item.name}
+                    className='w-full h-10 text-lg rounded border border-gray-400 px-3 mt-1 focus:outline-none focus:border-indigo-500'
+                    type="text"
+                    placeholder={item.placeholder}
+                    name={item.name}
+                    value={item.value}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
               ))}
               {
@@ -258,7 +270,7 @@ const ClientInfoForm = (props) => {
                 ))
               }
 
-              <div className="p-3 mb-4">
+              {/* <div className="p-3 mb-4">
                 <h3 className='block text-gray-700 font-semibold'>Upload Your Business Catalogue or Brochure (pdf)</h3>
                 <input
                   className='w-full h-10 text-lg rounded border border-gray-400 px-3 mt-1 focus:outline-none focus:border-indigo-500'
@@ -280,7 +292,20 @@ const ClientInfoForm = (props) => {
                   value={data.gallery}
                   onChange={handleInputChange}
                 />
+              </div> */}
+
+              <div className=' p-3 mb-4'>
+                <ImageSelector id='logo' label='Card Image' allowMultiple={false} url={url} handleFileChange={handleFileChange} />
+
               </div>
+              <div className=' p-3 mb-4'>
+                <ImageSelector id='logo' label='Card Image' allowMultiple={false} url={url} handleFileChange={handleFileChange} />
+
+              </div>
+
+
+
+
             </div>
 
             <div className="p-3">
@@ -296,11 +321,11 @@ const ClientInfoForm = (props) => {
               </label>
             </div>
           </div>
-<div className='flex justify-center'>
-        <button className='m-4 py-2 px-6  text-white bg-[#111827] rounded-full hover:bg-[#161f31] focus:outline-none focus:shadow-outline-indigo' onClick={onSubmit}>
-          Save & Update Profile
-        </button>
-        </div>
+          <div className='flex justify-center'>
+            <button className='m-4 py-2 px-6  text-white bg-[#111827] rounded-full hover:bg-[#161f31] focus:outline-none focus:shadow-outline-indigo' onClick={onSubmit}>
+              Save & Update Profile
+            </button>
+          </div>
         </div>
       </div >
     </>
