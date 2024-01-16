@@ -13,6 +13,7 @@ import { useState } from 'react'
 import { storage } from "src/Utils/Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import ImageSelector from 'src/components/ImageSelector/ImageSelector';
+import { toast } from '@redwoodjs/web/dist/toast';
 
 const ClientInfoForm = (props) => {
 
@@ -20,13 +21,46 @@ const ClientInfoForm = (props) => {
 
   const [data, setData] = useState(props.clientInfo.details)
   const [content, setContent] = useState('');
+  console.log(props.clientInfo.client)
 
   console.log(data)
   const onSubmit = () => {
+    if (file1) {
+      const storageRef = ref(storage, `portfolio/${props.clientInfo.client}/profileImage.jpg`);
+      const uploadTask = uploadBytesResumable(storageRef, file1);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Track upload progress
+          // You can use snapshot.bytesTransferred and snapshot.totalBytes
+        },
+        (error) => {
+          console.error(error.message);
+        },
+        async () => {
+          // Handle successful upload
+          console.log("File uploaded successfully!");
+
+          // Get the download URL
+          try {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            console.log("Download URL:", downloadURL);
+            setUrl1(downloadURL)
+            // data['imageUrl'] = downloadURL
+            // props.onSave(data, props?.card?.id)
+          } catch (error) {
+            console.error("Error getting download URL:", error.message);
+          }
+        }
+      );
+    } else {
+      toast.error("No file selected!");
+    }
     let d = {}
     // d['client'] = 'u'
     // d['userId'] = 1
-    d['details'] = data
+    d['details'] = {...data,'profileImage':url1}
 
     props.onSave(d, props?.clientInfo?.id)
   }
@@ -51,12 +85,12 @@ const ClientInfoForm = (props) => {
     setData(obj)
   }
 
-  const [file, setFile] = useState(null);
-  const [url, setUrl] = useState('')
+  const [file1, setFile1] = useState(null);
+  const [url1, setUrl1] = useState('')
 
-  const handleFileChange = (e) => {
+  const handleFileChange1 = (e) => {
     if (e.target.files[0]) {
-      setFile(e.target.files[0]);
+      setFile1(e.target.files[0]);
     }
   };
 
@@ -295,13 +329,13 @@ const ClientInfoForm = (props) => {
               </div> */}
 
               <div className=' p-3 mb-4'>
-                <ImageSelector id='logo' label='Card Image' allowMultiple={false} url={url} handleFileChange={handleFileChange} />
+                <ImageSelector id='logo' label='Profile Image' allowMultiple={false} url={url1} handleFileChange={handleFileChange1} />
 
               </div>
-              <div className=' p-3 mb-4'>
+              {/* <div className=' p-3 mb-4'>
                 <ImageSelector id='logo' label='Card Image' allowMultiple={false} url={url} handleFileChange={handleFileChange} />
 
-              </div>
+              </div> */}
 
 
 

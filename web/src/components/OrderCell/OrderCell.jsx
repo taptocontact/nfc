@@ -62,7 +62,10 @@ export const Success = ({ order }) => {
   // })
   const originRef = useRef()
   // if (!isLoaded) {
-  //   return <ProductCell />
+  //   return (
+  //     <>
+  //     </>
+  //   )
   // }
 
 

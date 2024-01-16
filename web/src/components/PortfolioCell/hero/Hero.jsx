@@ -58,9 +58,9 @@ const Hero = ({userDetail}) => {
         <div
           className="col-lg-4 bg position-fixed d-none d-lg-block"
           style={{
-            // backgroundImage: `url(${
-              // process.env.PUBLIC_URL + heroContent.heroImage
-            // })`,
+            backgroundImage: `url(${
+              userDetail.profileImage
+            })`,
           }}
         ></div>
         <div className="col-12 col-lg-8 offset-lg-4 home-details  text-center text-lg-start">

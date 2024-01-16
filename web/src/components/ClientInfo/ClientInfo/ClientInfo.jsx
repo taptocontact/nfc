@@ -43,35 +43,87 @@ const ClientInfo = ({ clientInfo }) => {
     setData(clientInfo.details);
     console.log(data)
   }, [data]);
-  useEffect(() => {
-    const generateQRCode =  (text) => {
-       qrcode.toCanvas(canvasRef.current, text, { color: { dark: '#000000', light: '#0000' } }, function (error) {
-        if (error) console.error(error);
-        console.log('success!');
-        // Get the 2D context of the canva
-      });
-      // const ctx = canvasRef.current.getContext('2d');
 
-      // // Load image
-      // const image = new Image();
-      // image.src = 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg';
 
-      // image.onload = () => {
-      //   // Set canvas size to match image size
-      //   canvasRef.current.width = image.width;
-      //   canvasRef.current.height = image.height;
+  useEffect( () => {
+    const generateQRCode = async (text) => {
+      try {
+          // Create a new canvas element
+          const canvas = document.createElement('canvas');
+          // Use qrcode.toCanvas to render the QR code to the canvas
+          await new Promise((resolve, reject) => {
+              qrcode.toCanvas(canvas, text,
+                 { color: { dark: '#000000', light: '#0000' } } ,
+                //  { color: { dark: '#00FF00', light: '#FF0000' } } ,
+                 (error) => {
+                  if (error) {
+                      reject(error);
+                  } else {
+                      resolve();
+                  }
+              });
+          });
 
-      //   // Draw the image onto the canvas at (0, 0)
+          // Get the data URL of the canvas
+          const imageUrl = canvas.toDataURL();
+          return imageUrl;
+      } catch (error) {
+          throw new Error('Error generating QR code: ' + error.message);
+      }
+  };
 
-      //   // Draw the QR code onto the canvas at the center
-      //   const qrCodeX = (image.width - canvasRef.current.width) / 2;
-      //   const qrCodeY = (image.height - canvasRef.current.height) / 2;
-      //   ctx.drawImage(canvasRef.current, qrCodeX, qrCodeY);
-      //   // ctx.drawImage(image, 0, 0);
-      // };
-    }
+  const generateCard = () => {
+    const canvas = canvasRef.current;
+    canvas.width = 320
+    canvas.height = 200
+    const ctx = canvas.getContext('2d');
 
-    generateQRCode('192.168.29.163:8910/portfolio/'+clientInfo.client);
+    const image2 = new Image();
+    image2.src = '/front.png';
+    image2.onload = async () => {
+      ctx.drawImage(image2, 0, 0,320,200); // (image, x, y, width, height)
+      const imageUrl = await generateQRCode('192.168.29.163:8910/portfolio/'+clientInfo.client);
+        const image1 = new Image();
+  image1.src = imageUrl;
+    image1.onload = () => {
+    ctx.drawImage(image1, 24, 60, 56, 56); // (image, x, y, width, height)
+  };
+
+
+
+    };
+
+
+  }
+  generateCard()
+
+
+
+
+
+
+  // const imageUrl = await generateQRCode('YourTextHere');
+  // console.log('QR code image URL:', imageUrl);
+
+
+  // // Load two images
+  // const image1 = new Image();
+  // image1.src = imageUrl;
+
+
+
+  // // // Draw the first image (lower one)
+
+
+  // // // Draw the second image (above the first one)
+
+  // image1.onload = () => {
+  //   ctx.drawImage(image1, 0, 0, 56, 56); // (image, x, y, width, height)
+  // };
+
+
+
+    // generateQRCode('192.168.29.163:8910/portfolio/'+clientInfo.client);
   }, []);
   const saveQRCodeImage = () => {
     const canvas = canvasRef.current;
@@ -80,6 +132,7 @@ const ClientInfo = ({ clientInfo }) => {
     const a = document.createElement('a');
     a.href = image;
     a.download = `qr_code_${clientInfo.client}.png`;
+    // console.log('image',image)
     a.click();
   };
   return (
