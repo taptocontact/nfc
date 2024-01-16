@@ -8,8 +8,8 @@
 [web]
   title = "Redwood App"
   port = 8910
-  #apiUrl = "/api"
-  apiUrl = "/.redwood/functions"
+  apiUrl = "/api"
+  #apiUrl = "/.redwood/functions"
 
 
   includeEnvironmentVariables = [

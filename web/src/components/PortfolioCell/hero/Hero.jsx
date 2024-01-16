@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 // import heroImg from "../../assets/img/hero/dark.jpg";
 // import heroImgMobile from "../../assets/img/hero/img-mobile.jpg";
-// import cancelImg from "../../assets/img/cancel.svg";
+import cancelImg from "../assets/img/cancel.svg";
 import Index from "../about/index";
 
 
@@ -19,7 +19,7 @@ const heroContent = {
   heroBtn: "more about me",
 };
 
-const Hero = ({userDetail}) => {
+const Hero = ({ userDetail }) => {
   const [isOpen, setIsOpen] = useState(false);
   function toggleModalOne() {
     setIsOpen(!isOpen);
@@ -58,9 +58,8 @@ const Hero = ({userDetail}) => {
         <div
           className="col-lg-4 bg position-fixed d-none d-lg-block"
           style={{
-            backgroundImage: `url(${
-              userDetail.profileImage
-            })`,
+            backgroundImage: `url(${userDetail.profileImage
+              })`,
           }}
         ></div>
         <div className="col-12 col-lg-8 offset-lg-4 home-details  text-center text-lg-start">
@@ -75,36 +74,51 @@ const Hero = ({userDetail}) => {
               <span>{userDetail.companyName}</span>
             </h1>
             <p className="open-sans-font">{userDetail.about}</p>
-            <button className="button" onClick={toggleModalOne}>
+            {/* <button className="button" onClick={toggleModalOne}> */}
+            <button className="button" >
               <span className="button-text">{heroContent.heroBtn}</span>
               <span className="button-icon fa fa-arrow-right"></span>
             </button>
             <ul className="social list-unstyled">
 
-        <li>
-        <style>{animationStyles}</style>
+              <li>
+                <style>{animationStyles}</style>
 
-          <a href={userDetail.facebook} target="_blank" rel="noreferrer">
-          <i className="fa fa-facebook" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
-          </a>
-          <a href={userDetail.instagram} target="_blank" rel="noreferrer">
-          <i className="fa fa-instagram" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
-           </a>
-          <a href={userDetail.linkedin} target="_blank" rel="noreferrer">
-          <i className="fa fa-linkedin" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
-          </a>
-          <a href={userDetail.twitter} target="_blank" rel="noreferrer">
-          <i className="fa fa-twitter" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
-                    </a>
-          <a href={userDetail.telegram} target="_blank" rel="noreferrer">
-          <i className="fa fa-telegram" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
-                    </a>
-          <a href={userDetail.youtube} target="_blank" rel="noreferrer">
-          <i className="fa fa-youtube" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px',padding:'8px' }}></i>
-                    </a>
+                <a href={userDetail.facebook} target="_blank" rel="noreferrer">
+                  <i className="fa fa-facebook" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
+                <a href={userDetail.instagram} target="_blank" rel="noreferrer">
+                  <i className="fa fa-instagram" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
+                <a href={userDetail.linkedin} target="_blank" rel="noreferrer">
+                  <i className="fa fa-linkedin" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
+                <a href={userDetail.twitter} target="_blank" rel="noreferrer">
+                  <i className="fa fa-twitter" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
+                <a href={userDetail.telegram} target="_blank" rel="noreferrer">
+                  <i className="fa fa-telegram" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
+                <a href={userDetail.youtube} target="_blank" rel="noreferrer">
+                  <i className="fa fa-youtube" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
 
-        </li>
-        </ul>
+
+
+
+                <a href={`tel:${userDetail.contact}`} style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}>
+                  <i className="fa fa-phone"></i>
+                </a>
+
+                <a href={`https://wa.me/${userDetail.contact}`} target="_blank" rel="noreferrer">
+                  <i className="fa fa-whatsapp" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
+                <a href={`upi://pay?pa=${userDetail.updId}`} target="_blank" rel="noreferrer">
+                  <i className="fa fa-money" style={{ margin: '12px', color: '#ffc107', border: '1px solid #ffc107', borderRadius: '10px', padding: '8px' }}></i>
+                </a>
+
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -121,7 +135,7 @@ const Hero = ({userDetail}) => {
       >
         <div>
           <button className="close-modal" onClick={toggleModalOne}>
-            {/* <img src={cancelImg} alt="close icon" /> */}
+            <img src={cancelImg} alt="close icon" />
           </button>
           {/* End close icon */}
 
@@ -134,7 +148,7 @@ const Hero = ({userDetail}) => {
                 <span className="title-bg">Resume</span>
               </div>
               {/* End title */}
-              <Index />
+              <Index userDetail={userDetail} />
             </div>
           </div>
         </div>
