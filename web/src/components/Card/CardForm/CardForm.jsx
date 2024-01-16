@@ -17,7 +17,7 @@ import { useState } from 'react';
 
 const CardForm = (props) => {
   const onSubmit = (data) => {
-    if (file) {
+    if (url=='' || file) {
       const storageRef = ref(storage, `cards/${data['type']}/${data['name']}.jpg`);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -53,7 +53,7 @@ const CardForm = (props) => {
   }
 
   const [file, setFile] = useState(null);
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState(props?.card?.imageUrl || '')
 
   const handleFileChange = (e) => {
     if (e.target.files[0]) {
@@ -146,7 +146,9 @@ const CardForm = (props) => {
 
         <FieldError name="imageUrl" className="rw-field-error" /> */}
         <div className='text-center'>
-          <ImageSelector id='logo' Label='Card Image' allowMultiple={false} url={url} handleFileChange={handleFileChange} />
+          <ImageSelector id='logo' Label='Card Image' allowMultiple={false} url={url} handleFileChange={handleFileChange}
+          setUrl={setUrl}
+          />
 
         </div>
 

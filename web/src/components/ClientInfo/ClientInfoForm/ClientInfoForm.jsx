@@ -20,12 +20,25 @@ const ClientInfoForm = (props) => {
 
 
   const [data, setData] = useState(props.clientInfo.details)
+  const [isChecked, setIsChecked] = useState(false);
+
+  // Handler function for the checkbox onChange event
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
   const [content, setContent] = useState('');
   console.log(props.clientInfo.client)
 
+  const [file1, setFile1] = useState(null);
+  const [url1, setUrl1] = useState(props?.clientInfo?.details?.profileImage || '')
+
   console.log(data)
   const onSubmit = () => {
-    if (file1) {
+    if(!isChecked){
+      toast.error('Check The Terms And Condition')
+      return
+    }
+    if (url1 == '') {
       const storageRef = ref(storage, `portfolio/${props.clientInfo.client}/profileImage.jpg`);
       const uploadTask = uploadBytesResumable(storageRef, file1);
 
@@ -54,13 +67,11 @@ const ClientInfoForm = (props) => {
           }
         }
       );
-    } else {
-      toast.error("No file selected!");
     }
     let d = {}
     // d['client'] = 'u'
     // d['userId'] = 1
-    d['details'] = {...data,'profileImage':url1}
+    d['details'] = { ...data, 'profileImage': url1 }
 
     props.onSave(d, props?.clientInfo?.id)
   }
@@ -85,8 +96,7 @@ const ClientInfoForm = (props) => {
     setData(obj)
   }
 
-  const [file1, setFile1] = useState(null);
-  const [url1, setUrl1] = useState('')
+
 
   const handleFileChange1 = (e) => {
     if (e.target.files[0]) {
@@ -222,6 +232,13 @@ const ClientInfoForm = (props) => {
       type: 'text',
       value: data.youtube,
       placeholder: 'Enter Youtube Url'
+    },
+    {
+      heading: 'UPI ID',
+      name: 'updId',
+      type: 'text',
+      value: data.updId,
+      placeholder: 'Enter Your UPI Id'
     }
   ];
 
@@ -241,20 +258,6 @@ const ClientInfoForm = (props) => {
       name: 'profileImage',
       type: 'textarea',
       value: data.profileImage,
-      placeholder: 'Choose Image'
-    },
-    {
-      heading: 'Banner Image',
-      name: 'bannerImage',
-      type: 'textarea',
-      value: data.bannerImage,
-      placeholder: 'Choose Image'
-    },
-    {
-      heading: 'Upi Payment Scanner',
-      name: 'scannerImage',
-      type: 'textarea',
-      value: data.scannerImage,
       placeholder: 'Choose Image'
     },
   ]
@@ -295,10 +298,22 @@ const ClientInfoForm = (props) => {
                 textAreaField.map((item) => (
                   < div className="p-3 mb-4 md:col-span-2" >
                     <h3 className='block text-gray-700 font-semibold'>{item.heading}</h3>
-                    <JoditEditor
+                    {/* <JoditEditor
                       value={item.value}
                       onChange={newContent => handleTextAreaChange(item.name, newContent)}
+                    /> */}
+                    <textarea
+                      id="myTextArea"
+                      name={item.name}
+                      value={item.value}
+                      onChange={handleInputChange}
+                      rows={4}
+                      cols={30}
+
                     />
+                    {/* <textarea id="w3review" name="w3review" rows="4" cols="10">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea> */}
+
+
 
                   </div>
                 ))
@@ -329,7 +344,9 @@ const ClientInfoForm = (props) => {
               </div> */}
 
               <div className=' p-3 mb-4'>
-                <ImageSelector id='logo' label='Profile Image' allowMultiple={false} url={url1} handleFileChange={handleFileChange1} />
+                <ImageSelector id='logo' label='Profile Image' allowMultiple={false} url={url1} handleFileChange={handleFileChange1}
+                  setUrl={setUrl1}
+                />
 
               </div>
               {/* <div className=' p-3 mb-4'>
@@ -346,8 +363,10 @@ const ClientInfoForm = (props) => {
               <label className='flex items-center'>
                 <input
                   type="checkbox"
-                  required
+
                   className='mr-2'
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
                 />
                 <span className='text-lg text-gray-700'>
                   I agree to the Terms and Conditions

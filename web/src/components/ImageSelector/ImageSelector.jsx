@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 
 
 
-const ImageSelector = ({ id, label, allowMultiple, handleFileChange, url }) => {
+const ImageSelector = ({ id, label, allowMultiple, handleFileChange, url,setUrl }) => {
 
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(url ||  null);
 
   const handleImage = (e) => {
+    setUrl('')
     const file = e.target.files[0];
     handleFileChange(e)
     if (file) {
@@ -31,7 +32,7 @@ const ImageSelector = ({ id, label, allowMultiple, handleFileChange, url }) => {
     <div>
       <h2 className="text-2xl font-bold mb-4">{label}</h2>
 
-      <div className="w-[8.50cm] pt-10 mt-8 p-8 bg-black rounded-lg relative">
+      <div className="md:w-[8.50cm]  pt-10 mt-8 p-8 bg-black rounded-lg relative">
         {/* Display selected images */}
         {selectedImage && (
           <div className="mb-4 flex flex-col items-center justify-center">
